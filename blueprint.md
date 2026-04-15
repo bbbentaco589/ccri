@@ -6,21 +6,20 @@ A high-performance web application providing crypto risk indices, real-time mark
 ## Project Outline
 
 ### Design and Style
-*   **Layout:** SPA architecture with hash-based routing.
+*   **Top Navigation:** Dark metallic purple bar with dropdown-style hover effects for external links (CCGG, Mink NFT).
 *   **Header:** Metallic purple 3D effect.
-*   **Detail View:** Features a large TradingView chart, coin descriptions, and an interactive rating system.
-*   **Theme:** Unified Dark/Light mode support with SVG icons.
+*   **Detail View:** Large-scale TradingView chart (800px height) for professional analysis.
+*   **Theme:** Unified Dark/Light mode support.
 
 ### Features
+*   **External Links:** Integration with CCGG Linktree and Mink NFT MarketPlace.
 *   **Market Charts:** Real-time price charts via TradingView Widget.
-*   **Rating System:** 0-10 point rating with 0.5 increments using 10 yellow stars.
-*   **Comment Section:** User feedback for each coin.
-*   **Coin List:** Filterable list of major cryptocurrencies with risk indices.
+*   **Rating & Comments:** User-driven 0-10 rating system and feedback section.
 
 ## Current Plan
-1.  **Update HTML/CSS**: Add detail view containers and styling for charts and stars.
-2.  **Enhance `main.js`**:
-    *   Implement hash routing (`#symbol`).
-    *   Integrate TradingView widget.
-    *   Build star rating and comment logic.
-3.  **Deployment**: Push to Git.
+1.  **Add Top Nav to HTML**: Insert the new navigation bar above the header.
+2.  **Style Nav & Chart in CSS**: 
+    *   Implement darker metallic purple for the top nav.
+    *   Increase chart container height to 800px.
+    *   Add hover animations for the nav items.
+3.  **Deployment**: Commit and push to Git.
