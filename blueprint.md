@@ -1,21 +1,27 @@
 # CCRI (Coin Crypto Risk Index)
 
 ## Overview
-A secure, community-driven crypto analysis platform with Firebase Google Auth and restored premium aesthetics.
+A secure, community-driven crypto analysis platform with Firebase Google Auth and high-performance mobile UI.
 
 ## Project Outline
 
 ### Design and Style
-*   **Restored Premium Nav:** Reverted to the dark metallic purple navigation bar with clean spacing and Pretendard typography.
-*   **Simple Login UI:** High-visibility "LOGIN" button in the top-right corner.
-*   **Responsive Charts:** Aspect-ratio based charts (16:9 PC, 1:1.2 Mobile) to prevent empty spaces.
+*   **Mobile-First Precision:** Fully responsive UI with synchronized margins for search and coin lists.
+*   **Stable Navigation:** Fixed top-nav with a functional hamburger menu and integrated LOGIN/LOGOUT.
+*   **Metallic Buttons:** Consistent premium purple metallic theme across all interactive elements.
 
 ### Features
-*   **Google Auth:** Direct "LOGIN" to Google integration via Firebase.
-*   **Protected Comments:** Access restricted to logged-in users with a clear "LOGIN" prompt.
-*   **Medal System:** Real-time 100-point community rating scores.
+*   **SPA Routing:** Clickable coin cards for seamless transitions to detailed charts and ratings.
+*   **Real-time Prices:** Live data synchronization with CoinCap API.
+*   **Medal System:** Dynamic Bronze/Silver/Gold tiers based on user ratings.
+*   **Protected Feedback:** Google Auth restricted comment and rating system.
 
 ## Current Plan
-1.  **Restore Aesthetics (CSS)**: Re-implement the premium dark metallic purple nav and clean fonts.
-2.  **Fix Auth UI (HTML/JS)**: Simplify login container to show a "LOGIN" button and ensure pop-up logic works.
+1.  **Mobile UI Stabilization (CSS)**:
+    *   Unify container paddings.
+    *   Fix mobile menu alignment and overlap issues.
+    *   Adjust chart aspect ratios for stability.
+2.  **Navigation Fix (JS)**:
+    *   Ensure `coin-card` click events set the correct hash.
+    *   Verify `handleRoute` toggles views correctly.
 3.  **Deployment**: Commit and push.

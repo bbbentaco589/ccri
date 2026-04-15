@@ -38,8 +38,8 @@ body {
     overflow-x: hidden;
 }
 
-/* Base Metallic Button Class */
-.btn-metallic {
+/* Metallic Button Class */
+.auth-btn, .theme-toggle, .back-btn, .btn-metallic, .vote-btn {
     background: var(--metallic-bg);
     color: white !important;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -55,14 +55,12 @@ body {
     gap: 8px;
     text-decoration: none;
     font-size: 0.85rem;
-    letter-spacing: 0.5px;
 }
-.btn-metallic:hover {
+.auth-btn:hover, .theme-toggle:hover, .back-btn:hover, .btn-metallic:hover, .vote-btn:hover {
     transform: translateY(-2px);
     box-shadow: var(--metallic-shadow), var(--metallic-glow);
     filter: brightness(1.1);
 }
-.btn-metallic:active { transform: translateY(0); }
 
 /* Navigation */
 .top-nav {
@@ -75,40 +73,12 @@ body {
 }
 .nav-logo { font-size: 1.5rem; font-weight: 900; cursor: pointer; letter-spacing: -1px; }
 .nav-menu { display: flex; gap: 1.5rem; align-items: center; }
-.nav-links { display: flex; gap: 2.5rem; }
-
-.nav-item { color: white; text-decoration: none; text-align: center; transition: opacity 0.2s; }
-.nav-item:hover { opacity: 0.8; }
-.main-label { font-weight: 700; font-size: 1rem; display: block; }
+.nav-links { display: flex; gap: 2rem; }
+.nav-item { color: white; text-decoration: none; text-align: center; }
+.main-label { font-weight: 700; font-size: 0.9rem; }
 .sub-label { font-size: 0.65rem; color: #ffcc00; display: block; }
 
-/* Overriding specific buttons with Metallic Style */
-.auth-btn, .theme-toggle, .back-btn, #submitComment, .vote-btn {
-    extend: .btn-metallic; /* Note: CSS doesn't support extend directly, applying properties below */
-    background: var(--metallic-bg);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50px;
-    padding: 0.6rem 1.5rem;
-    font-weight: 800;
-    cursor: pointer;
-    box-shadow: var(--metallic-shadow);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    font-size: 0.85rem;
-}
-
-.auth-btn:hover, .theme-toggle:hover, .back-btn:hover, #submitComment:hover, .vote-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--metallic-shadow), var(--metallic-glow);
-    filter: brightness(1.1);
-}
-
-.vote-btn { padding: 0.4rem 1rem; font-size: 0.75rem; border-radius: 8px; }
-.theme-toggle { background: rgba(0, 0, 0, 0.4); padding: 0.5rem 1.2rem; } /* Slightly darker for nav contrast */
-.theme-toggle svg { width: 16px; height: 16px; }
-.theme-toggle .icon-sun { color: #ffcc00; }
-.theme-toggle .icon-moon { color: #82ccdd; }
+.menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; }
 
 /* Header */
 header { background: var(--primary-gradient); color: white; text-align: center; padding: 5rem 1rem; box-shadow: var(--metallic-shadow); }
@@ -119,43 +89,52 @@ header { background: var(--primary-gradient); color: white; text-align: center; 
     filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); letter-spacing: -2px;
 }
 
-/* Search Section */
+/* Search Section & Container Alignment */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; box-sizing: border-box; }
 .search-section { padding: 4rem 0 2rem 0; width: 100%; }
-.search-wrapper { position: relative; max-width: 800px; margin: 0 auto; padding: 0 1.5rem; box-sizing: border-box; }
+.search-wrapper { position: relative; width: 100%; max-width: 800px; margin: 0 auto; }
 #searchInput {
     width: 100%; padding: 1.2rem 3.5rem 1.2rem 1.8rem;
     border: none; border-radius: 50px; background: var(--input-bg);
     color: var(--text-color); font-size: 1.1rem; box-shadow: 0 8px 24px var(--shadow-color);
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-sizing: border-box; transition: transform 0.3s;
 }
-.search-icon { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); font-size: 1.3rem; opacity: 0.5; }
+.search-icon { position: absolute; right: 25px; top: 50%; transform: translateY(-50%); font-size: 1.3rem; opacity: 0.5; }
 
-/* Chart & Others */
-.chart-container {
-    width: 100%; aspect-ratio: 16 / 9; min-height: 400px; max-height: 800px;
-    background: #131722; border-radius: 24px; overflow: hidden; margin-bottom: 3rem;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2); display: flex;
+/* Coin List */
+.coin-list {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem; padding: 2rem 0;
 }
-@media (max-width: 768px) {
-    .chart-container { aspect-ratio: 1 / 1.2; min-height: 450px; }
+coin-card {
+    background: var(--card-background); border-radius: 20px;
+    box-shadow: 0 10px 20px var(--shadow-color); cursor: pointer;
+    overflow: hidden; transition: transform 0.3s;
 }
-
-.coin-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; padding: 2rem 0; }
-coin-card { background: var(--card-background); border-radius: 20px; box-shadow: 0 10px 20px var(--shadow-color); cursor: pointer; overflow: hidden; transition: transform 0.3s; }
 coin-card:hover { transform: translateY(-8px); }
 
-.menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; }
+/* Detail View Viewport Optimization */
+.hidden { display: none !important; }
+.chart-container {
+    width: 100%; height: 75vh; min-height: 450px; max-height: 800px;
+    background: #131722; border-radius: 24px; overflow: hidden;
+    margin-bottom: 3rem; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
 
+/* Mobile Menu Fix */
 @media (max-width: 768px) {
     .menu-toggle { display: block; }
     .nav-menu {
-        position: fixed; top: 60px; right: -100%; width: 250px; height: calc(100vh - 60px);
+        position: fixed; top: 60px; right: -100%; width: 260px; height: calc(100vh - 60px);
         background: var(--nav-bg); flex-direction: column; padding: 2rem; gap: 2rem;
-        transition: right 0.3s ease; box-shadow: -5px 0 15px rgba(0,0,0,0.1); align-items: flex-start;
+        transition: right 0.3s ease; box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+        align-items: stretch; z-index: 3000;
     }
     .nav-menu.active { right: 0; }
     .nav-links { flex-direction: column; gap: 1.5rem; }
     .auth-btn, .theme-toggle { width: 100%; }
+    .detail-header { text-align: center; justify-content: center; }
+    .main-title { font-size: 3.5rem; }
 }
 
 footer { text-align: center; padding: 4rem; background: var(--footer-bg); margin-top: 6rem; }

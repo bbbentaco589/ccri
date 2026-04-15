@@ -42,7 +42,7 @@ auth.onAuthStateChanged((user) => {
         document.getElementById('logoutBtn').addEventListener('click', () => auth.signOut());
     } else {
         authContainer.innerHTML = `<button id="loginBtn" class="auth-btn">LOGIN</button>`;
-        document.getElementById('loginBtn').addEventListener('click', () => auth.signInWithPopup(provider));
+        document.getElementById('loginBtn')?.addEventListener('click', () => auth.signInWithPopup(provider));
     }
     if (window.location.hash) handleRoute();
 });
@@ -56,7 +56,7 @@ class CoinCard extends HTMLElement {
         const priceDisplay = coin.price > 0 ? `$${parseFloat(coin.price).toLocaleString(undefined, {minimumFractionDigits: 2})}` : "Loading...";
         this.shadowRoot.innerHTML = `
             <style>
-                .card { padding: 1.5rem; display: flex; flex-direction: column; color: var(--text-color); }
+                .card { padding: 1.5rem; display: flex; flex-direction: column; color: var(--text-color); height: 100%; box-sizing: border-box; }
                 .card-header { display: flex; align-items: center; margin-bottom: 1rem; gap: 10px; }
                 .card-header img { width: 32px; height: 32px; border-radius: 50%; background: #fff; padding: 2px; }
                 .medal-tag { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; font-weight: 800; }
@@ -66,14 +66,14 @@ class CoinCard extends HTMLElement {
             <div class="card">
                 <div class="card-header">
                     <img src="${coin.logo}" alt="${coin.name}" onerror="this.src='https://api.dicebear.com/7.x/identicon/svg?seed=${coin.symbol}'">
-                    <h3>${coin.name}</h3>
+                    <h3 style="margin:0; font-size:1.1rem;">${coin.name}</h3>
                     <span class="medal-tag" style="background:${medal.color}; color:${medal.textColor}">${medal.label}</span>
                 </div>
                 <div class="stats">가격: <span style="font-weight:600">${priceDisplay}</span></div>
                 <div class="stats">평점: <span class="rating">${avg}점</span></div>
             </div>
         `;
-        this.addEventListener('click', () => { window.location.hash = coin.symbol; });
+        this.onclick = () => { window.location.hash = coin.symbol; };
     }
 }
 customElements.define('coin-card', CoinCard);
@@ -141,8 +141,8 @@ function renderDetail(coin) {
         <div class="detail-header">
             <img src="${coin.logo}" alt="${coin.name}" onerror="this.src='https://api.dicebear.com/7.x/identicon/svg?seed=${coin.symbol}'">
             <div>
-                <h2>${coin.name} (${coin.symbol})</h2>
-                <p style="font-size:1.5rem; font-weight:bold; color:var(--primary-color); margin:0;">${priceDisplay}</p>
+                <h2 style="margin:0;">${coin.name} (${coin.symbol})</h2>
+                <p style="font-size:1.5rem; font-weight:bold; color:var(--primary-color); margin:5px 0 0 0;">${priceDisplay}</p>
             </div>
             <div class="avg-rating-box">
                 <span class="medal-badge medal-${medal.label.toLowerCase()}">${medal.label}</span>
@@ -150,14 +150,14 @@ function renderDetail(coin) {
             </div>
         </div>
         <div id="tradingview_widget" class="chart-container"></div>
-        <div class="description-section">
-            <h3>프로젝트 소개</h3>
-            <p>${coin.desc}</p>
+        <div class="description-section" style="background:var(--card-background); padding:2rem; border-radius:24px; margin-bottom:2rem; box-shadow:0 4px 12px var(--shadow-color);">
+            <h3 style="margin-top:0;">프로젝트 소개</h3>
+            <p style="line-height:1.8; opacity:0.9;">${coin.desc}</p>
         </div>
         <div class="rating-section" id="ratingSection"></div>
         <div class="comments-section">
-            <h3>커뮤니티 의견</h3>
-            <ul id="commentList" class="comment-list"></ul>
+            <h3 style="margin-bottom:1.5rem;">커뮤니티 의견</h3>
+            <ul id="commentList" style="list-style:none; padding:0;"></ul>
         </div>
     `;
 
@@ -170,12 +170,12 @@ function renderDetail(coin) {
                 <input type="range" id="ratingSlider" class="rating-slider" min="1" max="100" value="50">
             </div>
             <textarea id="commentInput" class="comment-textarea" placeholder="이 코인에 대한 한줄평을 남겨주세요..."></textarea>
-            <button id="submitComment" class="btn-metallic" style="width:100%; height: 50px;">게시하기</button>
+            <button id="submitComment" class="auth-btn" style="width:100%; height: 50px;">게시하기</button>
         `;
         setupDetailLogic(coin.symbol);
     } else {
         ratingSection.innerHTML = `
-            <div class="login-prompt">
+            <div class="login-prompt" style="text-align:center; padding:3rem; border:2px dashed var(--input-border); border-radius:24px;">
                 <h4>커뮤니티 평가에 참여하시겠습니까?</h4>
                 <p>댓글 작성과 평점 부여를 위해 로그인이 필요합니다.</p>
                 <button onclick="auth.signInWithPopup(provider)" class="auth-btn" style="margin: 1.5rem auto 0; padding: 0.8rem 2rem;">LOGIN</button>
