@@ -22,11 +22,16 @@ A web application that displays a list of cryptocurrencies and their risk index.
 
 ## Current Plan
 
-1.  **Create `blueprint.md`:** Document the project overview, outline, and the initial plan.
-2.  **Modify `index.html`:** Set up the basic HTML structure and add a theme toggle button.
-3.  **Modify `style.css`:** Implement CSS variables for themes and add transitions.
-4.  **Modify `main.js`:**
-    *   Implement theme switching logic.
-    *   Create a custom web component for displaying a single coin.
-    *   Fetch mock coin data.
-    *   Dynamically render the list of coins.
+1.  **Update `blueprint.md`**: Document the new visual and content requirements.
+2.  **Modify `index.html`**:
+    *   Update subtitle to "Crypto Consumer Rating Index".
+    *   Add SVG icons to the theme toggle button.
+3.  **Modify `style.css`**:
+    *   Update header background to a metallic purple with a 3D effect.
+    *   Enhance the theme toggle button styles.
+4.  **Modify `main.js`**:
+    *   Update `mockCoins` data to include actual logo URLs.
+    *   Update `CoinCard` component to use these logos.
+    *   Adjust theme toggle logic to handle icon switching if necessary.
+5.  **Git Commit & Push**: Commit the changes and push to the repository.
+
