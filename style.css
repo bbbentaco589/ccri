@@ -77,11 +77,7 @@ body {
     box-shadow: 0 6px 20px rgba(123, 44, 191, 0.4);
     border-color: var(--medal-gold);
 }
-.theme-toggle svg {
-    width: 18px;
-    height: 18px;
-    transition: transform 0.5s ease;
-}
+.theme-toggle svg { width: 18px; height: 18px; transition: transform 0.5s ease; }
 .theme-toggle:hover svg { transform: rotate(20deg); }
 .theme-toggle .icon-sun { color: #ffcc00; filter: drop-shadow(0 0 5px rgba(255, 204, 0, 0.5)); }
 .theme-toggle .icon-moon { color: #82ccdd; filter: drop-shadow(0 0 5px rgba(130, 204, 221, 0.5)); }
@@ -95,14 +91,22 @@ header { background: var(--primary-gradient); color: white; text-align: center; 
     filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); letter-spacing: -2px;
 }
 
-/* Search Section */
-.search-section { padding: 4rem 1.5rem 2rem 1.5rem; }
-.search-wrapper { position: relative; max-width: 700px; margin: 0 auto; }
+/* Search Section - Fixed Mobile Alignment */
+.search-section { 
+    padding: 4rem 0 2rem 0; /* Vertical padding only */
+    width: 100%;
+}
+.search-wrapper { 
+    position: relative; 
+    max-width: 800px; /* Slightly wider */
+    margin: 0 auto; 
+}
 #searchInput {
     width: 100%; padding: 1.2rem 3.5rem 1.2rem 1.8rem;
     border: none; border-radius: 50px; background: var(--input-bg);
     color: var(--text-color); font-size: 1.1rem; box-shadow: 0 8px 24px var(--shadow-color);
     transition: transform 0.3s, box-shadow 0.3s;
+    box-sizing: border-box; /* Crucial for padding */
 }
 #searchInput:focus { outline: none; transform: translateY(-2px); box-shadow: 0 12px 32px var(--shadow-color); }
 .search-icon { position: absolute; right: 25px; top: 50%; transform: translateY(-50%); font-size: 1.3rem; opacity: 0.5; }
@@ -141,10 +145,7 @@ coin-card:hover { transform: translateY(-8px); }
     display: flex; align-items: center; gap: 1rem; background: var(--card-background);
     padding: 1rem 2.5rem; border-radius: 50px; box-shadow: 0 8px 16px var(--shadow-color);
 }
-.medal-badge {
-    padding: 0.5rem 1.2rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem;
-    text-transform: uppercase;
-}
+.medal-badge { padding: 0.5rem 1.2rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; }
 .medal-gold { background: var(--medal-gold); color: #000; }
 .medal-silver { background: var(--medal-silver); color: #000; }
 .medal-bronze { background: var(--medal-bronze); color: #fff; }
@@ -191,6 +192,10 @@ coin-card:hover { transform: translateY(-8px); }
     .detail-header { justify-content: center; text-align: center; }
     .main-title { font-size: 4rem; }
     .chart-container { height: 50vh; min-height: 400px; }
+    
+    /* Mobile Search Bar Fixed Alignment */
+    .search-section { padding: 3rem 0 1.5rem 0; }
+    .search-wrapper { max-width: 100%; }
 }
 
 footer { text-align: center; padding: 4rem; background: var(--footer-bg); margin-top: 6rem; }
