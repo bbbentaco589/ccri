@@ -33,6 +33,9 @@ class CoinCard extends HTMLElement {
                     height: 32px;
                     margin-right: 0.8rem;
                     object-fit: contain;
+                    border-radius: 50%;
+                    background: #fff;
+                    padding: 2px;
                 }
                 .card-header h3 {
                     margin: 0;
@@ -64,7 +67,7 @@ class CoinCard extends HTMLElement {
             </style>
             <div class="card">
                 <div class="card-header">
-                    <img src="${coin.logo}" alt="${coin.name} logo">
+                    <img src="${coin.logo}" alt="${coin.name} logo" onerror="this.src='https://api.dicebear.com/7.x/identicon/svg?seed=${coin.symbol}'">
                     <h3>${coin.name} (${coin.symbol})</h3>
                 </div>
                 <div class="card-body">
@@ -86,42 +89,42 @@ const mockCoins = [
         symbol: "BTC", 
         price: 65000, 
         riskIndex: 20, 
-        logo: "https://cryptologos.cc/logos/bitcoin-btc-logo.svg?v=032" 
+        logo: "https://assets.coincap.io/assets/icons/btc@2x.png" 
     },
     { 
         name: "Ethereum", 
         symbol: "ETH", 
         price: 3500, 
         riskIndex: 35, 
-        logo: "https://cryptologos.cc/logos/ethereum-eth-logo.svg?v=032" 
+        logo: "https://assets.coincap.io/assets/icons/eth@2x.png" 
     },
     { 
         name: "Ripple", 
         symbol: "XRP", 
         price: 0.5, 
         riskIndex: 75, 
-        logo: "https://cryptologos.cc/logos/xrp-xrp-logo.svg?v=032" 
+        logo: "https://assets.coincap.io/assets/icons/xrp@2x.png" 
     },
     { 
         name: "Litecoin", 
         symbol: "LTC", 
         price: 150, 
         riskIndex: 50, 
-        logo: "https://cryptologos.cc/logos/litecoin-ltc-logo.svg?v=032" 
+        logo: "https://assets.coincap.io/assets/icons/ltc@2x.png" 
     },
     { 
         name: "Cardano", 
         symbol: "ADA", 
         price: 0.45, 
         riskIndex: 60, 
-        logo: "https://cryptologos.cc/logos/cardano-ada-logo.svg?v=032" 
+        logo: "https://assets.coincap.io/assets/icons/ada@2x.png" 
     },
     { 
         name: "Solana", 
         symbol: "SOL", 
         price: 150, 
         riskIndex: 40, 
-        logo: "https://cryptologos.cc/logos/solana-sol-logo.svg?v=032" 
+        logo: "https://assets.coincap.io/assets/icons/sol@2x.png" 
     },
 ];
 
