@@ -21,21 +21,22 @@
             </div>
             <button id="themeToggle" class="theme-toggle">
                 <span class="icon"></span>
-                <span class="text">Dark Mode</span>
+                <span class="text">다크 모드</span>
             </button>
         </div>
     </nav>
 
     <header>
-        <h1 id="homeLink" style="cursor: pointer;">CCRI</h1>
+        <h1 id="homeLink" class="main-title">CCRI</h1>
         <p>Crypto Consumer Rating Index</p>
     </header>
 
     <main>
         <div id="list-view" class="view">
             <div class="container">
-                <div class="search-container">
+                <div class="search-wrapper">
                     <input type="text" id="searchInput" placeholder="Search for a coin...">
+                    <span class="search-icon">🔍</span>
                 </div>
                 <div id="coin-list" class="coin-list">
                     <!-- Coin components will be inserted here -->
@@ -45,7 +46,9 @@
 
         <div id="detail-view" class="view hidden">
             <div class="container">
-                <button id="backButton" class="back-btn">← Back to List</button>
+                <button id="backButton" class="back-btn">
+                    <span class="arrow">←</span> 뒤로가기
+                </button>
                 <div id="detail-content">
                     <!-- Detail content will be inserted here -->
                 </div>

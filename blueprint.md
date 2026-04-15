@@ -1,28 +1,28 @@
 # CCRI (Coin Crypto Risk Index)
 
 ## Overview
-A high-performance web application providing crypto risk indices, real-time market charts, and user-driven ratings.
+A community-driven crypto analysis platform with real-time charts and precision rating systems.
 
 ## Project Outline
 
 ### Design and Style
-*   **Top Navigation:** Dark metallic purple bar containing external links and the **Theme Toggle**.
-*   **Header:** Metallic purple 3D effect.
-*   **Detail View:** Professional-grade TradingView chart (1000px height).
-*   **Theme:** Unified Dark/Light mode support.
+*   **Header:** Ultra-large 3D metallic CCRI title.
+*   **Search:** Enhanced search bar with a magnifying glass icon and increased vertical spacing.
+*   **Detail View:** Large-scale TradingView chart (1200px height) for maximum visibility.
+*   **Integrated Form:** Combined comment and 0.1-step precision rating system.
 
 ### Features
-*   **Top 9 Coins:** Bitcoin, Ethereum, Tether, BNB, Solana, XRP, USDC, Cardano, Dogecoin.
-*   **Localization:** Korean descriptions for all coin detail pages.
-*   **Interactive Rating:** 0-10 point rating system.
+*   **Average Rating:** Real-time calculation of user ratings displayed in the detail header.
+*   **Precision Star System:** 10 stars that fill dynamically based on 0.1 increment ratings.
+*   **Data Persistence:** LocalStorage management for detailed user feedback and ratings.
 
 ## Current Plan
-1.  **Update HTML**: Relocate theme toggle and update footer text.
-2.  **Enhance CSS**: 
-    *   Style the theme toggle in its new location.
-    *   Set chart height to 1000px.
-    *   Refine "Back to List" button with purple/black metallic theme.
-3.  **Update JS**: 
-    *   Expand `mockCoins` to 9 items with Korean text.
-    *   Adjust logic for the relocated theme toggle.
-4.  **Deployment**: Commit and push.
+1.  **UI Overhaul (HTML/CSS)**: 
+    *   Increase title size.
+    *   Add search icon and spacing.
+    *   Redesign detail page to match widths and show average ratings.
+2.  **Logic Update (JS)**:
+    *   Implement 0.1-step rating slider.
+    *   Calculate and display average ratings per coin.
+    *   Bind rating selection to comment submission.
+3.  **Deployment**: Commit and push to Git.

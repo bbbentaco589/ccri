@@ -17,22 +17,23 @@ class CoinCard extends HTMLElement {
     constructor() { super(); this.attachShadow({ mode: 'open' }); }
     connectedCallback() {
         const coin = JSON.parse(this.getAttribute('coin'));
+        const avgRating = calculateAverageRating(coin.symbol);
         this.shadowRoot.innerHTML = `
             <style>
                 .card { padding: 1.5rem; display: flex; flex-direction: column; color: var(--text-color); }
                 .card-header { display: flex; align-items: center; margin-bottom: 1rem; }
                 .card-header img { width: 32px; height: 32px; margin-right: 0.8rem; border-radius: 50%; background: #fff; padding: 2px; }
                 .card-header h3 { margin: 0; font-size: 1.1rem; }
-                .risk-index { width: 100%; background: var(--footer-bg); border-radius: 8px; overflow: hidden; margin-top: 1rem; }
-                .risk-index-fill { height: 10px; background: var(--primary-color); width: ${coin.riskIndex}%; transition: width 0.5s; }
+                .stats { font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.8; }
+                .rating { color: #ffcc00; font-weight: bold; }
             </style>
             <div class="card">
                 <div class="card-header">
                     <img src="${coin.logo}" alt="${coin.name}" onerror="this.src='https://api.dicebear.com/7.x/identicon/svg?seed=${coin.symbol}'">
                     <h3>${coin.name} (${coin.symbol})</h3>
                 </div>
-                <p>현재가: $${coin.price.toLocaleString()}</p>
-                <div class="risk-index"><div class="risk-index-fill"></div></div>
+                <div class="stats">가격: $${coin.price.toLocaleString()}</div>
+                <div class="stats">평점: <span class="rating">★ ${avgRating}</span></div>
             </div>
         `;
         this.addEventListener('click', () => { window.location.hash = coin.symbol; });
@@ -40,14 +41,17 @@ class CoinCard extends HTMLElement {
 }
 customElements.define('coin-card', CoinCard);
 
-const coinList = document.getElementById('coin-list');
-const searchInput = document.getElementById('searchInput');
-const themeToggle = document.getElementById('themeToggle');
+function calculateAverageRating(symbol) {
+    const comments = JSON.parse(localStorage.getItem(`comments_${symbol}`) || '[]');
+    if (comments.length === 0) return "0.0";
+    const sum = comments.reduce((acc, curr) => acc + (parseFloat(curr.rating) || 0), 0);
+    return (sum / comments.length).toFixed(1);
+}
+
 const listView = document.getElementById('list-view');
 const detailView = document.getElementById('detail-view');
 const detailContent = document.getElementById('detail-content');
-const backButton = document.getElementById('backButton');
-const homeLink = document.getElementById('homeLink');
+const searchInput = document.getElementById('searchInput');
 
 function handleRoute() {
     const symbol = window.location.hash.substring(1);
@@ -66,14 +70,19 @@ function handleRoute() {
 }
 
 window.addEventListener('hashchange', handleRoute);
-backButton.addEventListener('click', () => { window.location.hash = ''; });
-homeLink.addEventListener('click', () => { window.location.hash = ''; });
+document.getElementById('backButton').addEventListener('click', () => { window.location.hash = ''; });
+document.getElementById('homeLink').addEventListener('click', () => { window.location.hash = ''; });
 
 function renderDetail(coin) {
+    const avgRating = calculateAverageRating(coin.symbol);
     detailContent.innerHTML = `
         <div class="detail-header">
             <img src="${coin.logo}" alt="${coin.name}" onerror="this.src='https://api.dicebear.com/7.x/identicon/svg?seed=${coin.symbol}'">
             <h2>${coin.name} (${coin.symbol})</h2>
+            <div class="avg-rating-box">
+                <span class="avg-score">★ ${avgRating}</span>
+                <span>커뮤니티 평균 평점</span>
+            </div>
         </div>
         <div id="tradingview_widget" class="chart-container"></div>
         <div class="description-section">
@@ -81,90 +90,55 @@ function renderDetail(coin) {
             <p>${coin.desc}</p>
         </div>
         <div class="rating-section">
-            <h3>커뮤니티 평가</h3>
-            <p>이 코인의 평점을 선택해주세요 (0-10):</p>
-            <div id="starContainer" class="star-rating">
-                ${Array(10).fill().map((_, i) => `<span class="star" data-index="${i}">★</span>`).join('')}
-                <span id="ratingValue" class="rating-value">0.0</span>
+            <h3>평가 및 의견 남기기</h3>
+            <div class="rating-form-container">
+                <div class="slider-container">
+                    <p>당신의 평점: <strong id="currentSliderVal">5.0</strong> / 10.0</p>
+                    <div id="precisionStars" class="precision-stars" style="--percent: 50%;">★★★★★★★★★★</div>
+                    <input type="range" id="ratingSlider" class="rating-slider" min="0" max="10" step="0.1" value="5">
+                </div>
+                <textarea id="commentInput" class="comment-textarea" placeholder="프로젝트에 대한 의견을 자유롭게 남겨주세요..."></textarea>
+                <button id="submitComment" class="back-btn">의견 게시하기</button>
             </div>
         </div>
         <div class="comments-section">
-            <h3>댓글 한줄평</h3>
-            <div class="comment-form">
-                <textarea id="commentInput" placeholder="이 코인에 대한 의견을 남겨주세요..."></textarea>
-                <button id="submitComment">댓글 작성</button>
-            </div>
+            <h3>커뮤니티 한줄평</h3>
             <ul id="commentList" class="comment-list"></ul>
         </div>
     `;
 
     new TradingView.widget({
-        "width": "100%",
-        "height": "100%",
+        "width": "100%", "height": "100%",
         "symbol": coin.symbol === "USDC" ? "COINBASE:USDCUSDT" : `BINANCE:${coin.symbol}USDT`,
-        "interval": "D",
-        "timezone": "Etc/UTC",
+        "interval": "D", "timezone": "Etc/UTC",
         "theme": document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light',
-        "style": "1",
-        "locale": "ko",
-        "toolbar_bg": "#f1f3f6",
-        "enable_publishing": false,
-        "allow_symbol_change": true,
-        "container_id": "tradingview_widget"
+        "style": "1", "locale": "ko", "container_id": "tradingview_widget"
     });
 
-    setupRatingSystem(coin.symbol);
-    setupCommentSystem(coin.symbol);
+    setupIntegratedForm(coin.symbol);
 }
 
-function setupRatingSystem(symbol) {
-    const container = document.getElementById('starContainer');
-    const stars = container.querySelectorAll('.star');
-    const valDisplay = document.getElementById('ratingValue');
-    let currentRating = localStorage.getItem(`rating_${symbol}`) || 0;
-    
-    const updateStars = (rating) => {
-        valDisplay.textContent = parseFloat(rating).toFixed(1);
-        stars.forEach((star, i) => {
-            star.classList.remove('filled', 'half');
-            if (i < Math.floor(rating)) star.classList.add('filled');
-            else if (i < rating) star.classList.add('half');
-        });
-    };
-
-    updateStars(currentRating);
-
-    container.addEventListener('mousemove', (e) => {
-        const rect = container.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const widthPerStar = rect.width / 10;
-        let hoverRating = Math.ceil((x / widthPerStar) * 2) / 2;
-        hoverRating = Math.max(0, Math.min(10, hoverRating));
-        updateStars(hoverRating);
-    });
-
-    container.addEventListener('mouseleave', () => updateStars(currentRating));
-    
-    container.addEventListener('click', (e) => {
-        const rect = container.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const widthPerStar = rect.width / 10;
-        currentRating = Math.ceil((x / widthPerStar) * 2) / 2;
-        localStorage.setItem(`rating_${symbol}`, currentRating);
-        updateStars(currentRating);
-    });
-}
-
-function setupCommentSystem(symbol) {
+function setupIntegratedForm(symbol) {
+    const slider = document.getElementById('ratingSlider');
+    const stars = document.getElementById('precisionStars');
+    const valDisplay = document.getElementById('currentSliderVal');
     const input = document.getElementById('commentInput');
     const btn = document.getElementById('submitComment');
     const list = document.getElementById('commentList');
-    
+
+    slider.addEventListener('input', (e) => {
+        const val = parseFloat(e.target.value);
+        valDisplay.textContent = val.toFixed(1);
+        stars.style.setProperty('--percent', `${val * 10}%`);
+    });
+
     const loadComments = () => {
         const comments = JSON.parse(localStorage.getItem(`comments_${symbol}`) || '[]');
         list.innerHTML = comments.map(c => `
             <li class="comment-item">
-                <div class="comment-meta">${new Date(c.date).toLocaleString()}</div>
+                <div class="comment-meta">
+                    <span class="rating">★ ${parseFloat(c.rating).toFixed(1)}</span> | ${new Date(c.date).toLocaleString()}
+                </div>
                 <div class="comment-text">${c.text}</div>
             </li>
         `).reverse().join('');
@@ -172,12 +146,12 @@ function setupCommentSystem(symbol) {
 
     btn.addEventListener('click', () => {
         const text = input.value.trim();
-        if (!text) return;
+        if (!text) return alert('의견을 입력해주세요!');
         const comments = JSON.parse(localStorage.getItem(`comments_${symbol}`) || '[]');
-        comments.push({ text, date: new Date().toISOString() });
+        comments.push({ text, rating: slider.value, date: new Date().toISOString() });
         localStorage.setItem(`comments_${symbol}`, JSON.stringify(comments));
         input.value = '';
-        loadComments();
+        renderDetail(mockCoins.find(c => c.symbol === symbol)); // Refresh to show new avg
     });
 
     loadComments();
@@ -186,14 +160,13 @@ function setupCommentSystem(symbol) {
 function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
-    const themeIcon = themeToggle.querySelector('.icon');
-    const themeText = themeToggle.querySelector('.text');
-    if (theme === 'light') { themeIcon.innerHTML = MOON_ICON; themeText.textContent = '다크 모드'; }
-    else { themeIcon.innerHTML = SUN_ICON; themeText.textContent = '라이트 모드'; }
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.querySelector('.icon').innerHTML = theme === 'light' ? MOON_ICON : SUN_ICON;
+    themeBtn.querySelector('.text').textContent = theme === 'light' ? '다크 모드' : '라이트 모드';
     if (window.location.hash) handleRoute();
 }
 
-themeToggle.addEventListener('click', () => {
+document.getElementById('themeToggle').addEventListener('click', () => {
     const newTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     applyTheme(newTheme);
 });
@@ -201,6 +174,7 @@ themeToggle.addEventListener('click', () => {
 applyTheme(localStorage.getItem('theme') || 'light');
 
 function renderCoins(coins) {
+    const coinList = document.getElementById('coin-list');
     coinList.innerHTML = '';
     coins.forEach(coin => {
         const card = document.createElement('coin-card');
