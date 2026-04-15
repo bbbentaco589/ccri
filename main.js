@@ -29,7 +29,6 @@ const mockCoins = [
 
 let currentUser = null;
 
-// --- Auth Monitoring ---
 auth.onAuthStateChanged((user) => {
     currentUser = user;
     const authContainer = document.getElementById('authContainer');
@@ -50,7 +49,7 @@ auth.onAuthStateChanged((user) => {
         `;
         document.getElementById('loginBtn').onclick = () => auth.signInWithPopup(provider);
     }
-    if (window.location.hash) handleRoute();
+    handleRoute();
 });
 
 class CoinCard extends HTMLElement {
@@ -93,7 +92,7 @@ async function updateRealTimePrices() {
             const liveData = data.data.find(asset => asset.symbol === coin.symbol);
             if (liveData) coin.price = liveData.priceUsd;
         });
-        if (!window.location.hash) renderCoins(mockCoins);
+        if (!window.location.hash || window.location.hash === '#event') renderCoins(mockCoins);
     } catch (error) { console.error("Price fetch failed", error); }
 }
 
@@ -111,22 +110,33 @@ function getMedal(avg) {
 }
 
 function handleRoute() {
-    const symbol = window.location.hash.substring(1);
+    const hash = window.location.hash.substring(1);
     const listView = document.getElementById('list-view');
     const detailView = document.getElementById('detail-view');
-    if (symbol) {
-        const coin = mockCoins.find(c => c.symbol === symbol);
+    const eventView = document.getElementById('event-view');
+
+    // Hide all views first
+    listView.classList.add('hidden');
+    detailView.classList.add('hidden');
+    eventView.classList.add('hidden');
+
+    if (hash === 'event') {
+        eventView.classList.remove('hidden');
+        window.scrollTo(0, 0);
+    } else if (hash) {
+        const coin = mockCoins.find(c => c.symbol === hash);
         if (coin) {
             renderDetail(coin);
-            listView.classList.add('hidden');
             detailView.classList.remove('hidden');
             window.scrollTo(0, 0);
-            return;
+        } else {
+            listView.classList.remove('hidden');
+            renderCoins(mockCoins);
         }
+    } else {
+        listView.classList.remove('hidden');
+        renderCoins(mockCoins);
     }
-    listView.classList.remove('hidden');
-    detailView.classList.add('hidden');
-    renderCoins(mockCoins);
 }
 
 window.addEventListener('hashchange', handleRoute);
@@ -209,8 +219,8 @@ function setupDetailLogic(symbol) {
     const input = document.getElementById('commentInput');
     const btn = document.getElementById('submitComment');
 
-    slider.oninput = (e) => valDisplay.textContent = e.target.value;
-    btn.onclick = () => {
+    if (slider) slider.oninput = (e) => valDisplay.textContent = e.target.value;
+    if (btn) btn.onclick = () => {
         const text = input.value.trim();
         if (!text) return alert('내용을 입력해주세요!');
         let comments = JSON.parse(localStorage.getItem(`comments_${symbol}`) || '[]');
@@ -223,6 +233,7 @@ function setupDetailLogic(symbol) {
 
 function loadComments(symbol) {
     const list = document.getElementById('commentList');
+    if (!list) return;
     let comments = JSON.parse(localStorage.getItem(`comments_${symbol}`) || '[]');
     comments.sort((a, b) => ((b.up || 0) - (b.down || 0)) - ((a.up || 0) - (a.down || 0)));
     list.innerHTML = comments.map((c, i) => `
@@ -267,7 +278,7 @@ function applyTheme(theme) {
     const themeText = themeBtn.querySelector('.text');
     themeIcon.innerHTML = theme === 'light' ? MOON_ICON : SUN_ICON;
     themeText.textContent = theme === 'light' ? '다크 모드' : '라이트 모드';
-    if (window.location.hash) handleRoute();
+    if (window.location.hash && window.location.hash !== '#event') handleRoute();
 }
 
 document.getElementById('themeToggle').onclick = () => {

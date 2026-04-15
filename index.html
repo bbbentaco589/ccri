@@ -27,6 +27,10 @@
                         <span class="main-label">Coin Exchange</span>
                         <span class="sub-label">Upbit ↗</span>
                     </a>
+                    <a href="#event" class="nav-item">
+                        <span class="main-label">Event</span>
+                        <span class="sub-label">Apply ↗</span>
+                    </a>
                 </div>
                 <div id="authContainer" class="auth-container">
                     <button id="loginBtn" class="auth-btn">
@@ -49,6 +53,7 @@
     </header>
 
     <main>
+        <!-- List View -->
         <div id="list-view" class="view">
             <div class="container">
                 <div class="search-section">
@@ -63,6 +68,7 @@
             </div>
         </div>
 
+        <!-- Detail View -->
         <div id="detail-view" class="view hidden">
             <div class="container">
                 <button id="backButton" class="back-btn">
@@ -70,6 +76,34 @@
                 </button>
                 <div id="detail-content">
                     <!-- Detail content will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Event View -->
+        <div id="event-view" class="view hidden">
+            <div class="container">
+                <button class="back-btn" onclick="window.location.hash = ''">
+                    <span class="arrow">←</span> 메인으로 돌아가기
+                </button>
+                <div class="event-form-container">
+                    <h2>Event 신청 및 문의</h2>
+                    <p>진행 중인 이벤트에 참여하거나 궁금한 점을 남겨주세요.</p>
+                    <form action="https://formspree.io/f/xgoroeag" method="POST" class="event-form">
+                        <div class="form-group">
+                            <label>성함/닉네임</label>
+                            <input type="text" name="name" required placeholder="이름을 입력하세요">
+                        </div>
+                        <div class="form-group">
+                            <label>이메일 주소</label>
+                            <input type="email" name="_replyto" required placeholder="답변 받을 이메일을 입력하세요">
+                        </div>
+                        <div class="form-group">
+                            <label>신청/문의 내용</label>
+                            <textarea name="message" required placeholder="내용을 자유롭게 입력해 주세요"></textarea>
+                        </div>
+                        <button type="submit" class="auth-btn" style="width:100%; height:55px; margin-top:1rem;">신청하기</button>
+                    </form>
                 </div>
             </div>
         </div>

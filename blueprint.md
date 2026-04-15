@@ -1,27 +1,23 @@
 # CCRI (Coin Crypto Risk Index)
 
 ## Overview
-A secure, community-driven crypto analysis platform with Firebase Google Auth and high-performance mobile UI.
+A secure, community-driven crypto analysis platform with Firebase Google Auth and event application features.
 
 ## Project Outline
 
 ### Design and Style
-*   **Mobile-First Precision:** Fully responsive UI with synchronized margins for search and coin lists.
-*   **Stable Navigation:** Fixed top-nav with a functional hamburger menu and integrated LOGIN/LOGOUT.
-*   **Metallic Buttons:** Consistent premium purple metallic theme across all interactive elements.
+*   **Event View:** A dedicated clean form page for event applications, maintaining the metallic purple aesthetic.
+*   **Restored Premium Nav:** Dark metallic purple navigation bar with Pretendard typography.
+*   **Responsive Charts:** Aspect-ratio based charts (16:9 PC, 1:1.2 Mobile).
 
 ### Features
-*   **SPA Routing:** Clickable coin cards for seamless transitions to detailed charts and ratings.
+*   **Event Application:** Integrated Formspree (`https://formspree.io/f/xgoroeag`) for collecting user inquiries and event sign-ups.
+*   **Google Auth:** LOGIN to Google integration via Firebase.
+*   **Protected Comments:** Access restricted to logged-in users.
 *   **Real-time Prices:** Live data synchronization with CoinCap API.
-*   **Medal System:** Dynamic Bronze/Silver/Gold tiers based on user ratings.
-*   **Protected Feedback:** Google Auth restricted comment and rating system.
 
 ## Current Plan
-1.  **Mobile UI Stabilization (CSS)**:
-    *   Unify container paddings.
-    *   Fix mobile menu alignment and overlap issues.
-    *   Adjust chart aspect ratios for stability.
-2.  **Navigation Fix (JS)**:
-    *   Ensure `coin-card` click events set the correct hash.
-    *   Verify `handleRoute` toggles views correctly.
-3.  **Deployment**: Commit and push.
+1.  **Add Event Link (HTML)**: Add "Event" to the top navigation links.
+2.  **Create Event View (HTML/CSS)**: Add a form container and style it with the metallic theme.
+3.  **Routing Logic (JS)**: Handle `#event` hash to show the application form.
+4.  **Deployment**: Commit and push.
