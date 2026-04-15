@@ -6,20 +6,23 @@ A high-performance web application providing crypto risk indices, real-time mark
 ## Project Outline
 
 ### Design and Style
-*   **Top Navigation:** Dark metallic purple bar with dropdown-style hover effects for external links (CCGG, Mink NFT).
+*   **Top Navigation:** Dark metallic purple bar containing external links and the **Theme Toggle**.
 *   **Header:** Metallic purple 3D effect.
-*   **Detail View:** Large-scale TradingView chart (800px height) for professional analysis.
+*   **Detail View:** Professional-grade TradingView chart (1000px height).
 *   **Theme:** Unified Dark/Light mode support.
 
 ### Features
-*   **External Links:** Integration with CCGG Linktree and Mink NFT MarketPlace.
-*   **Market Charts:** Real-time price charts via TradingView Widget.
-*   **Rating & Comments:** User-driven 0-10 rating system and feedback section.
+*   **Top 9 Coins:** Bitcoin, Ethereum, Tether, BNB, Solana, XRP, USDC, Cardano, Dogecoin.
+*   **Localization:** Korean descriptions for all coin detail pages.
+*   **Interactive Rating:** 0-10 point rating system.
 
 ## Current Plan
-1.  **Add Top Nav to HTML**: Insert the new navigation bar above the header.
-2.  **Style Nav & Chart in CSS**: 
-    *   Implement darker metallic purple for the top nav.
-    *   Increase chart container height to 800px.
-    *   Add hover animations for the nav items.
-3.  **Deployment**: Commit and push to Git.
+1.  **Update HTML**: Relocate theme toggle and update footer text.
+2.  **Enhance CSS**: 
+    *   Style the theme toggle in its new location.
+    *   Set chart height to 1000px.
+    *   Refine "Back to List" button with purple/black metallic theme.
+3.  **Update JS**: 
+    *   Expand `mockCoins` to 9 items with Korean text.
+    *   Adjust logic for the relocated theme toggle.
+4.  **Deployment**: Commit and push.
