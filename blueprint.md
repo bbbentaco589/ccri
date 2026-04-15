@@ -1,28 +1,24 @@
 # CCRI (Coin Crypto Risk Index)
 
 ## Overview
-A professional crypto analysis community featuring real-time charts, medal-based ratings, and upvote-driven discussions.
+A professional crypto analysis community featuring real-time market data, medal-based ratings, and upvote-driven discussions.
 
 ## Project Outline
 
 ### Design and Style
-*   **Theming:** Restored clean and elegant Light/Dark modes with refined typography.
-*   **Mobile First:** Responsive design optimized for devices like Galaxy S20, featuring a hamburger menu for top categories.
-*   **Layout Spacing:** Balanced spacing between header, search bar, and coin list.
-*   **Medal System:** 
-    *   Gold: 90-100
-    *   Silver: 70-89
-    *   Bronze: Below 70
+*   **Real-time UI:** Coin prices on the main page update automatically to match live market rates.
+*   **Theming:** Clean Light/Dark modes with refined typography.
+*   **Mobile First:** Responsive design with a hamburger menu for navigation.
 
 ### Features
-*   **100-Point Rating:** User ratings from 1 to 100 with dynamic medal display.
-*   **Votable Comments:** Upvote/Downvote system with sorting by popularity.
-*   **Best Comments:** Highlights top 3 most-upvoted comments.
-*   **SPA Routing:** Reliable hash-based navigation to detail pages.
+*   **Live Price Ticker:** Integration with CoinCap API for real-time price updates every 10 seconds.
+*   **100-Point Rating:** User ratings from 1 to 100 with dynamic medal display (Gold/Silver/Bronze).
+*   **Votable Comments:** Upvote/Downvote system with popularity-based sorting and "BEST" highlights.
+*   **Professional Charts:** Large-scale TradingView charts in the detail view.
 
 ## Current Plan
-1.  **Responsive Layout (HTML/CSS)**: Implement mobile menu and fix spacing.
-2.  **Theming & Fonts**: Restore aesthetic fonts and balanced colors.
-3.  **Rating & Medals (JS)**: Update to 100-point scale and add medal logic.
-4.  **Advanced Comments (JS)**: Implement voting, sorting, and "Best" badges.
-5.  **Deployment**: Push to Git.
+1.  **Real-time Integration (JS)**:
+    *   Implement `updateRealTimePrices` function using CoinCap API.
+    *   Set up a 10-second polling interval for the main list.
+    *   Ensure price formatting matches global standards.
+2.  **Deployment**: Commit and push to Git.

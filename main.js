@@ -2,15 +2,15 @@ const SUN_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 const MOON_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
 
 const mockCoins = [
-    { name: "Bitcoin", symbol: "BTC", price: 65000, riskIndex: 15, logo: "https://assets.coincap.io/assets/icons/btc@2x.png", desc: "비트코인은 최초의 분산형 디지털 통화로, 중앙 은행이나 단일 관리자 없이 운영되는 피어 투 피어(P2P) 네트워크 기반의 가상자산입니다." },
-    { name: "Ethereum", symbol: "ETH", price: 3500, riskIndex: 25, logo: "https://assets.coincap.io/assets/icons/eth@2x.png", desc: "이더리움은 스마트 계약 기능을 갖춘 오픈 소스 블록체인 플랫폼입니다. 분산형 애플리케이션(DApp)을 구축할 수 있는 생태계를 제공합니다." },
-    { name: "Tether", symbol: "USDT", price: 1, riskIndex: 10, logo: "https://assets.coincap.io/assets/icons/usdt@2x.png", desc: "테더는 미국 달러의 가치와 1:1로 고정되도록 설계된 스테이블코인입니다. 암호화폐 시장의 변동성을 피하기 위한 수단으로 쓰입니다." },
-    { name: "BNB", symbol: "BNB", price: 600, riskIndex: 30, logo: "https://assets.coincap.io/assets/icons/bnb@2x.png", desc: "BNB는 바이낸스 생태계의 기조 자산입니다. 거래 수수료 할인 및 바이낸스 스마트 체인 상의 결제 수단으로 사용됩니다." },
-    { name: "Solana", symbol: "SOL", price: 145, riskIndex: 45, logo: "https://assets.coincap.io/assets/icons/sol@2x.png", desc: "솔라나는 높은 처리 속도와 낮은 수수료를 목표로 하는 고성능 블록체인입니다. 역사 증명(PoH) 알고리즘을 사용합니다." },
-    { name: "Ripple", symbol: "XRP", price: 0.5, riskIndex: 50, logo: "https://assets.coincap.io/assets/icons/xrp@2x.png", desc: "리플은 금융 기관 간의 빠르고 저렴한 국제 송금을 지원하기 위해 설계된 디지털 자산입니다." },
-    { name: "USDC", symbol: "USDC", price: 1, riskIndex: 5, logo: "https://assets.coincap.io/assets/icons/usdc@2x.png", desc: "USDC는 실제 달러 자산을 담보로 발행되는 스테이블코인입니다. 높은 투명성과 규제 준수를 강조합니다." },
-    { name: "Cardano", symbol: "ADA", price: 0.45, riskIndex: 40, logo: "https://assets.coincap.io/assets/icons/ada@2x.png", desc: "카르다노는 과학적 철학을 바탕으로 개발된 블록체인입니다. 보안과 확장성, 지속 가능성에 집중합니다." },
-    { name: "Dogecoin", symbol: "DOGE", price: 0.15, riskIndex: 85, logo: "https://assets.coincap.io/assets/icons/doge@2x.png", desc: "도지코인은 인터넷 밈에서 시작된 가상자산입니다. 강력한 커뮤니티 지지를 바탕으로 소액 결제 등에 사용됩니다." }
+    { name: "Bitcoin", symbol: "BTC", price: 0, riskIndex: 15, logo: "https://assets.coincap.io/assets/icons/btc@2x.png", desc: "비트코인은 최초의 분산형 디지털 통화로, 중앙 은행이나 단일 관리자 없이 운영되는 피어 투 피어(P2P) 네트워크 기반의 가상자산입니다." },
+    { name: "Ethereum", symbol: "ETH", price: 0, riskIndex: 25, logo: "https://assets.coincap.io/assets/icons/eth@2x.png", desc: "이더리움은 스마트 계약 기능을 갖춘 오픈 소스 블록체인 플랫폼입니다. 분산형 애플리케이션(DApp)을 구축할 수 있는 생태계를 제공합니다." },
+    { name: "Tether", symbol: "USDT", price: 0, riskIndex: 10, logo: "https://assets.coincap.io/assets/icons/usdt@2x.png", desc: "테더는 미국 달러의 가치와 1:1로 고정되도록 설계된 스테이블코인입니다. 암호화폐 시장의 변동성을 피하기 위한 수단으로 쓰입니다." },
+    { name: "BNB", symbol: "BNB", price: 0, riskIndex: 30, logo: "https://assets.coincap.io/assets/icons/bnb@2x.png", desc: "BNB는 바이낸스 생태계의 기조 자산입니다. 거래 수수료 할인 및 바이낸스 스마트 체인 상의 결제 수단으로 사용됩니다." },
+    { name: "Solana", symbol: "SOL", price: 0, riskIndex: 45, logo: "https://assets.coincap.io/assets/icons/sol@2x.png", desc: "솔라나는 높은 처리 속도와 낮은 수수료를 목표로 하는 고성능 블록체인입니다. 역사 증명(PoH) 알고리즘을 사용합니다." },
+    { name: "Ripple", symbol: "XRP", price: 0, riskIndex: 50, logo: "https://assets.coincap.io/assets/icons/xrp@2x.png", desc: "리플은 금융 기관 간의 빠르고 저렴한 국제 송금을 지원하기 위해 설계된 디지털 자산입니다." },
+    { name: "USDC", symbol: "USDC", price: 0, riskIndex: 5, logo: "https://assets.coincap.io/assets/icons/usdc@2x.png", desc: "USDC는 실제 달러 자산을 담보로 발행되는 스테이블코인입니다. 높은 투명성과 규제 준수를 강조합니다." },
+    { name: "Cardano", symbol: "ADA", price: 0, riskIndex: 40, logo: "https://assets.coincap.io/assets/icons/ada@2x.png", desc: "카르다노는 과학적 철학을 바탕으로 개발된 블록체인입니다. 보안과 확장성, 지속 가능성에 집중합니다." },
+    { name: "Dogecoin", symbol: "DOGE", price: 0, riskIndex: 85, logo: "https://assets.coincap.io/assets/icons/doge@2x.png", desc: "도지코인은 인터넷 밈에서 시작된 가상자산입니다. 강력한 커뮤니티 지지를 바탕으로 소액 결제 등에 사용됩니다." }
 ];
 
 class CoinCard extends HTMLElement {
@@ -19,14 +19,18 @@ class CoinCard extends HTMLElement {
         const coin = JSON.parse(this.getAttribute('coin'));
         const avg = calculateAverageRating(coin.symbol);
         const medal = getMedal(avg);
+        const priceDisplay = coin.price > 0 ? `$${parseFloat(coin.price).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 6})}` : "Loading...";
+        
         this.shadowRoot.innerHTML = `
             <style>
                 .card { padding: 1.5rem; display: flex; flex-direction: column; color: var(--text-color); }
                 .card-header { display: flex; align-items: center; margin-bottom: 1rem; gap: 10px; }
                 .card-header img { width: 32px; height: 32px; border-radius: 50%; background: #fff; padding: 2px; }
+                .card-header h3 { margin: 0; font-size: 1.1rem; }
                 .medal-tag { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; font-weight: 800; }
                 .stats { font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.8; }
                 .rating { font-weight: bold; color: #7b2cbf; }
+                .price { font-weight: 600; color: var(--primary-color); }
             </style>
             <div class="card">
                 <div class="card-header">
@@ -34,7 +38,7 @@ class CoinCard extends HTMLElement {
                     <h3>${coin.name}</h3>
                     <span class="medal-tag" style="background:${medal.color}; color:${medal.textColor}">${medal.label}</span>
                 </div>
-                <div class="stats">가격: $${coin.price.toLocaleString()}</div>
+                <div class="stats">현재가: <span class="price">${priceDisplay}</span></div>
                 <div class="stats">평점: <span class="rating">${avg}점</span></div>
             </div>
         `;
@@ -42,6 +46,28 @@ class CoinCard extends HTMLElement {
     }
 }
 customElements.define('coin-card', CoinCard);
+
+// --- Real-time Price Fetching ---
+async function updateRealTimePrices() {
+    try {
+        const response = await fetch('https://api.coincap.io/v2/assets?limit=50');
+        const data = await response.json();
+        
+        mockCoins.forEach(coin => {
+            const liveData = data.data.find(asset => asset.symbol === coin.symbol);
+            if (liveData) {
+                coin.price = liveData.priceUsd;
+            }
+        });
+
+        // Only re-render if we are in list view
+        if (!window.location.hash) {
+            renderCoins(mockCoins);
+        }
+    } catch (error) {
+        console.error("Price fetch failed:", error);
+    }
+}
 
 function calculateAverageRating(symbol) {
     const comments = JSON.parse(localStorage.getItem(`comments_${symbol}`) || '[]');
@@ -75,6 +101,7 @@ function handleRoute() {
     }
     listView.classList.remove('hidden');
     detailView.classList.add('hidden');
+    renderCoins(mockCoins);
 }
 
 window.addEventListener('hashchange', handleRoute);
@@ -82,7 +109,6 @@ document.getElementById('backButton').addEventListener('click', () => { window.l
 document.getElementById('homeLink').addEventListener('click', () => { window.location.hash = ''; });
 document.getElementById('homeLinkTop').addEventListener('click', () => { window.location.hash = ''; });
 
-// Mobile Menu Toggle
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
 menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
@@ -90,10 +116,15 @@ menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
 function renderDetail(coin) {
     const avg = calculateAverageRating(coin.symbol);
     const medal = getMedal(avg);
+    const priceDisplay = coin.price > 0 ? `$${parseFloat(coin.price).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}` : "Loading...";
+
     detailContent.innerHTML = `
         <div class="detail-header">
             <img src="${coin.logo}" alt="${coin.name}" onerror="this.src='https://api.dicebear.com/7.x/identicon/svg?seed=${coin.symbol}'">
-            <h2>${coin.name} (${coin.symbol})</h2>
+            <div>
+                <h2>${coin.name} (${coin.symbol})</h2>
+                <p style="font-size:1.5rem; font-weight:bold; color:var(--primary-color); margin:0;">${priceDisplay}</p>
+            </div>
             <div class="avg-rating-box">
                 <span class="medal-badge medal-${medal.label.toLowerCase()}">${medal.label}</span>
                 <strong>평균 ${avg}점</strong>
@@ -141,13 +172,7 @@ function setupDetailLogic(symbol) {
 
     const loadComments = () => {
         let comments = JSON.parse(localStorage.getItem(`comments_${symbol}`) || '[]');
-        
-        // Sort by popularity (upvotes - downvotes)
-        comments.sort((a, b) => {
-            const scoreA = (a.up || 0) - (a.down || 0);
-            const scoreB = (b.up || 0) - (b.down || 0);
-            return scoreB - scoreA;
-        });
+        comments.sort((a, b) => ((b.up || 0) - (b.down || 0)) - ((a.up || 0) - (a.down || 0)));
 
         list.innerHTML = comments.map((c, i) => `
             <li class="comment-item">
@@ -169,14 +194,7 @@ function setupDetailLogic(symbol) {
         const text = input.value.trim();
         if (!text) return alert('내용을 입력해주세요!');
         let comments = JSON.parse(localStorage.getItem(`comments_${symbol}`) || '[]');
-        comments.push({
-            id: Date.now(),
-            text,
-            rating: slider.value,
-            date: new Date().toISOString(),
-            up: 0,
-            down: 0
-        });
+        comments.push({ id: Date.now(), text, rating: slider.value, date: new Date().toISOString(), up: 0, down: 0 });
         localStorage.setItem(`comments_${symbol}`, JSON.stringify(comments));
         input.value = '';
         renderDetail(mockCoins.find(c => c.symbol === symbol));
@@ -188,12 +206,7 @@ function setupDetailLogic(symbol) {
 window.handleVote = (symbol, commentId, type) => {
     let comments = JSON.parse(localStorage.getItem(`comments_${symbol}`) || '[]');
     const userVotedKey = `voted_${commentId}`;
-    
-    if (localStorage.getItem(userVotedKey)) {
-        alert('이미 참여하셨습니다!');
-        return;
-    }
-
+    if (localStorage.getItem(userVotedKey)) return alert('이미 참여하셨습니다!');
     const comment = comments.find(c => c.id === commentId);
     if (comment) {
         comment[type] = (comment[type] || 0) + 1;
@@ -235,7 +248,12 @@ searchInput.addEventListener('input', (e) => {
     renderCoins(filtered);
 });
 
+// Init
 const script = document.createElement('script');
 script.src = "https://s3.tradingview.com/tv.js";
-script.onload = () => { handleRoute(); renderCoins(mockCoins); };
+script.onload = () => { 
+    handleRoute(); 
+    updateRealTimePrices();
+    setInterval(updateRealTimePrices, 10000); // Update every 10 seconds
+};
 document.head.appendChild(script);
