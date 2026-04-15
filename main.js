@@ -1,5 +1,5 @@
-const SUN_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
-const MOON_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+const SUN_ICON = `<svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+const MOON_ICON = `<svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
 
 const mockCoins = [
     { name: "Bitcoin", symbol: "BTC", price: 0, riskIndex: 15, logo: "https://assets.coincap.io/assets/icons/btc@2x.png", desc: "비트코인은 최초의 분산형 디지털 통화로, 중앙 은행이나 단일 관리자 없이 운영되는 피어 투 피어(P2P) 네트워크 기반의 가상자산입니다." },
@@ -47,23 +47,15 @@ class CoinCard extends HTMLElement {
 }
 customElements.define('coin-card', CoinCard);
 
-// --- Real-time Price Fetching ---
 async function updateRealTimePrices() {
     try {
         const response = await fetch('https://api.coincap.io/v2/assets?limit=50');
         const data = await response.json();
-        
         mockCoins.forEach(coin => {
             const liveData = data.data.find(asset => asset.symbol === coin.symbol);
-            if (liveData) {
-                coin.price = liveData.priceUsd;
-            }
+            if (liveData) coin.price = liveData.priceUsd;
         });
-
-        // Only re-render if we are in list view
-        if (!window.location.hash) {
-            renderCoins(mockCoins);
-        }
+        if (!window.location.hash) renderCoins(mockCoins);
     } catch (error) {
         console.error("Price fetch failed:", error);
     }
@@ -248,12 +240,11 @@ searchInput.addEventListener('input', (e) => {
     renderCoins(filtered);
 });
 
-// Init
 const script = document.createElement('script');
 script.src = "https://s3.tradingview.com/tv.js";
 script.onload = () => { 
     handleRoute(); 
     updateRealTimePrices();
-    setInterval(updateRealTimePrices, 10000); // Update every 10 seconds
+    setInterval(updateRealTimePrices, 10000);
 };
 document.head.appendChild(script);

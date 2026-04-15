@@ -54,6 +54,38 @@ body {
 
 .menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; }
 
+/* Theme Toggle Button Refined */
+.theme-toggle {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+.theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(123, 44, 191, 0.4);
+    border-color: var(--medal-gold);
+}
+.theme-toggle svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.5s ease;
+}
+.theme-toggle:hover svg { transform: rotate(20deg); }
+.theme-toggle .icon-sun { color: #ffcc00; filter: drop-shadow(0 0 5px rgba(255, 204, 0, 0.5)); }
+.theme-toggle .icon-moon { color: #82ccdd; filter: drop-shadow(0 0 5px rgba(130, 204, 221, 0.5)); }
+
 /* Header */
 header { background: var(--primary-gradient); color: white; text-align: center; padding: 5rem 1rem; box-shadow: var(--metallic-shadow); }
 .main-title {
@@ -64,7 +96,7 @@ header { background: var(--primary-gradient); color: white; text-align: center; 
 }
 
 /* Search Section */
-.search-section { padding: 4rem 1.5rem 2rem 1.5rem; } /* Added space */
+.search-section { padding: 4rem 1.5rem 2rem 1.5rem; }
 .search-wrapper { position: relative; max-width: 700px; margin: 0 auto; }
 #searchInput {
     width: 100%; padding: 1.2rem 3.5rem 1.2rem 1.8rem;
@@ -98,7 +130,7 @@ coin-card:hover { transform: translateY(-8px); }
 }
 
 .chart-container {
-    height: 70vh; min-height: 600px; /* Viewport-based height */
+    height: 70vh; min-height: 600px;
     background: #131722; border-radius: 24px; overflow: hidden;
     margin-bottom: 3rem; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
 }
