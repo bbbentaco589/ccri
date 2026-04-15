@@ -1,14 +1,30 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCRI - Coin Crypto Risk Index</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+    <header>
+        <h1>CCRI</h1>
+        <p>Coin Crypto Risk Index</p>
+    </header>
+    <main>
+        <div class="container">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for a coin...">
+            </div>
+            <div id="coin-list" class="coin-list">
+                <!-- Coin components will be inserted here -->
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 CCRI. All rights reserved.</p>
+    </footer>
+    <script src="main.js" type="module"></script>
 </body>
 </html>
