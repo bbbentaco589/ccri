@@ -36,33 +36,55 @@ body {
     overflow-x: hidden;
 }
 
-/* Navigation & Auth */
+/* Navigation & Auth (Restore Format) */
 .top-nav {
     background: var(--nav-bg); color: white; padding: 0.8rem 0;
-    position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 .nav-container {
     max-width: 1200px; margin: 0 auto; display: flex;
     justify-content: space-between; align-items: center; padding: 0 1.5rem;
 }
 .nav-logo { font-size: 1.5rem; font-weight: 900; cursor: pointer; letter-spacing: -1px; }
-.nav-menu { display: flex; gap: 1.5rem; align-items: center; }
+.nav-menu { display: flex; gap: 2rem; align-items: center; }
+.nav-links { display: flex; gap: 2.5rem; }
+
+.nav-item { color: white; text-decoration: none; text-align: center; transition: opacity 0.2s; }
+.nav-item:hover { opacity: 0.8; }
+.main-label { font-weight: 700; font-size: 1rem; display: block; }
+.sub-label { font-size: 0.65rem; color: #ffcc00; display: block; }
+
+/* LOGIN Button Style */
 .auth-btn {
-    background: white; color: #444; border: none; padding: 0.5rem 1rem;
-    border-radius: 4px; font-weight: 700; font-size: 0.8rem; cursor: pointer;
-    display: flex; align-items: center; gap: 8px; transition: all 0.2s;
+    background: var(--primary-color);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    font-weight: 800;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
 }
-.auth-btn:hover { background: #f1f1f1; transform: translateY(-1px); }
+.auth-btn:hover {
+    background: #9d4edd;
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
 .user-profile { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; font-weight: 600; }
 .user-profile img { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--medal-gold); }
 
-/* Theme Toggle Button */
+/* Theme Toggle Button Refined */
 .theme-toggle {
     background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.15); color: white;
     padding: 0.5rem 1rem; border-radius: 50px; cursor: pointer;
     font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; gap: 8px;
 }
+.theme-toggle svg { width: 16px; height: 16px; }
+.theme-toggle .icon-sun { color: #ffcc00; }
+.theme-toggle .icon-moon { color: #82ccdd; }
 
 /* Header */
 header { background: var(--primary-gradient); color: white; text-align: center; padding: 5rem 1rem; box-shadow: var(--metallic-shadow); }
@@ -82,68 +104,33 @@ header { background: var(--primary-gradient); color: white; text-align: center; 
     color: var(--text-color); font-size: 1.1rem; box-shadow: 0 8px 24px var(--shadow-color);
     transition: transform 0.3s, box-shadow 0.3s;
 }
-#searchInput:focus { outline: none; transform: translateY(-2px); box-shadow: 0 12px 32px var(--shadow-color); }
 .search-icon { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); font-size: 1.3rem; opacity: 0.5; }
 
-/* Coin List */
-.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
-.coin-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; padding: 2rem 0; }
-coin-card { background: var(--card-background); border-radius: 20px; box-shadow: 0 10px 20px var(--shadow-color); cursor: pointer; overflow: hidden; transition: transform 0.3s; }
-coin-card:hover { transform: translateY(-8px); }
-
-/* Optimized Chart Container - Using Aspect Ratio to fix empty spaces */
+/* Chart & Others */
 .chart-container {
-    width: 100%;
-    aspect-ratio: 16 / 9; /* Professional ratio */
-    min-height: 400px;
-    max-height: 800px;
-    background: #131722;
-    border-radius: 24px;
-    overflow: hidden;
-    margin-bottom: 3rem;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    display: flex;
+    width: 100%; aspect-ratio: 16 / 9; min-height: 400px; max-height: 800px;
+    background: #131722; border-radius: 24px; overflow: hidden; margin-bottom: 3rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2); display: flex;
 }
 @media (max-width: 768px) {
     .chart-container { aspect-ratio: 1 / 1.2; min-height: 450px; }
 }
-.chart-container > div { width: 100% !important; height: 100% !important; }
 
-/* Comment Restriction UI */
-.login-prompt {
-    background: var(--footer-bg); padding: 3rem; border-radius: 24px;
-    text-align: center; border: 2px dashed var(--input-border); margin-bottom: 2rem;
-}
-.login-prompt h4 { margin-top: 0; font-size: 1.2rem; }
-.login-prompt .auth-btn { margin: 1.5rem auto 0; background: var(--primary-color); color: white; padding: 0.8rem 2rem; }
+.coin-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; padding: 2rem 0; }
+coin-card { background: var(--card-background); border-radius: 20px; box-shadow: 0 10px 20px var(--shadow-color); cursor: pointer; overflow: hidden; transition: transform 0.3s; }
+coin-card:hover { transform: translateY(-8px); }
 
-.detail-header { display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; margin-bottom: 3rem; }
-.detail-header img { width: 80px; height: 80px; border-radius: 50%; background: #fff; padding: 5px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-.avg-rating-box { display: flex; align-items: center; gap: 1rem; background: var(--card-background); padding: 1rem 2.5rem; border-radius: 50px; box-shadow: 0 8px 16px var(--shadow-color); }
-.medal-badge { padding: 0.5rem 1.2rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; }
-.medal-gold { background: var(--medal-gold); color: #000; }
-.medal-silver { background: var(--medal-silver); color: #000; }
-.medal-bronze { background: var(--medal-bronze); color: #fff; }
-
-.rating-section { background: var(--card-background); padding: 3rem; border-radius: 24px; margin-bottom: 3rem; }
-.comment-textarea { width: 100%; box-sizing: border-box; padding: 1.5rem; border-radius: 16px; border: 1px solid var(--input-border); background: var(--input-bg); color: var(--text-color); font-size: 1.1rem; min-height: 150px; margin-bottom: 2rem; }
-.slider-container { margin-bottom: 2rem; }
-.rating-slider { width: 100%; height: 8px; border-radius: 5px; accent-color: var(--primary-color); }
-
-.comment-item { background: var(--card-background); padding: 2rem; border-radius: 16px; margin-bottom: 1.5rem; position: relative; border: 1px solid var(--input-border); }
-.best-badge { position: absolute; top: -10px; right: 20px; background: #ff4757; color: white; padding: 4px 12px; border-radius: 10px; font-size: 0.75rem; font-weight: 900; }
-.voting-container { display: flex; align-items: center; gap: 15px; margin-top: 1rem; }
-.vote-btn { background: var(--footer-bg); border: none; padding: 6px 12px; border-radius: 8px; cursor: pointer; color: var(--text-color); font-size: 0.9rem; display: flex; align-items: center; gap: 5px; transition: 0.2s; }
+.menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; }
 
 @media (max-width: 768px) {
     .menu-toggle { display: block; }
     .nav-menu {
         position: fixed; top: 60px; right: -100%; width: 250px; height: calc(100vh - 60px);
-        background: var(--nav-bg); flex-direction: column; padding: 2rem;
-        transition: right 0.3s ease; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        background: var(--nav-bg); flex-direction: column; padding: 2rem; gap: 2rem;
+        transition: right 0.3s ease; box-shadow: -5px 0 15px rgba(0,0,0,0.1); align-items: flex-start;
     }
     .nav-menu.active { right: 0; }
-    .main-title { font-size: 4rem; }
+    .nav-links { flex-direction: column; gap: 1.5rem; }
 }
 
 footer { text-align: center; padding: 4rem; background: var(--footer-bg); margin-top: 6rem; }

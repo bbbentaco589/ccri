@@ -1,6 +1,6 @@
-// Firebase Configuration (Compat mode for easier integration)
+// Firebase Configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAs-FakeKeyForDemo", // 실제 배포 시 Firebase Console의 키로 교체 필요
+    apiKey: "AIzaSyAs-FakeKeyForDemo",
     authDomain: "ccri-test.firebaseapp.com",
     projectId: "ccri-test",
     storageBucket: "ccri-test.appspot.com",
@@ -8,10 +8,7 @@ const firebaseConfig = {
     appId: "1:123456789:web:abcdef"
 };
 
-// Initialize Firebase if not already initialized
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-}
+if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -40,30 +37,16 @@ auth.onAuthStateChanged((user) => {
         authContainer.innerHTML = `
             <div class="user-profile">
                 <img src="${user.photoURL}" alt="profile">
-                <span>${user.displayName.split(' ')[0]}님</span>
-                <button onclick="handleLogout()" class="auth-btn" style="background:none; color:white; border:1px solid rgba(255,255,255,0.3)">로그아웃</button>
+                <button id="logoutBtn" class="auth-btn" style="background:rgba(255,255,255,0.1)">LOGOUT</button>
             </div>
         `;
+        document.getElementById('logoutBtn').addEventListener('click', () => auth.signOut());
     } else {
-        authContainer.innerHTML = `<button id="loginBtn" class="auth-btn">Google 로그인</button>`;
-        document.getElementById('loginBtn')?.addEventListener('click', handleLogin);
+        authContainer.innerHTML = `<button id="loginBtn" class="auth-btn">LOGIN</button>`;
+        document.getElementById('loginBtn').addEventListener('click', () => auth.signInWithPopup(provider));
     }
-    // If we are in detail view, refresh to show/hide comment form
     if (window.location.hash) handleRoute();
 });
-
-async function handleLogin() {
-    try {
-        await auth.signInWithPopup(provider);
-    } catch (error) {
-        console.error("Login failed:", error);
-        alert("로그인에 실패했습니다.");
-    }
-}
-
-function handleLogout() {
-    auth.signOut();
-}
 
 class CoinCard extends HTMLElement {
     constructor() { super(); this.attachShadow({ mode: 'open' }); }
@@ -71,18 +54,15 @@ class CoinCard extends HTMLElement {
         const coin = JSON.parse(this.getAttribute('coin'));
         const avg = calculateAverageRating(coin.symbol);
         const medal = getMedal(avg);
-        const priceDisplay = coin.price > 0 ? `$${parseFloat(coin.price).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 6})}` : "Loading...";
-        
+        const priceDisplay = coin.price > 0 ? `$${parseFloat(coin.price).toLocaleString(undefined, {minimumFractionDigits: 2})}` : "Loading...";
         this.shadowRoot.innerHTML = `
             <style>
                 .card { padding: 1.5rem; display: flex; flex-direction: column; color: var(--text-color); }
                 .card-header { display: flex; align-items: center; margin-bottom: 1rem; gap: 10px; }
                 .card-header img { width: 32px; height: 32px; border-radius: 50%; background: #fff; padding: 2px; }
-                .card-header h3 { margin: 0; font-size: 1.1rem; }
                 .medal-tag { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; font-weight: 800; }
                 .stats { font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.8; }
                 .rating { font-weight: bold; color: #7b2cbf; }
-                .price { font-weight: 600; color: var(--primary-color); }
             </style>
             <div class="card">
                 <div class="card-header">
@@ -90,7 +70,7 @@ class CoinCard extends HTMLElement {
                     <h3>${coin.name}</h3>
                     <span class="medal-tag" style="background:${medal.color}; color:${medal.textColor}">${medal.label}</span>
                 </div>
-                <div class="stats">현재가: <span class="price">${priceDisplay}</span></div>
+                <div class="stats">가격: <span style="font-weight:600">${priceDisplay}</span></div>
                 <div class="stats">평점: <span class="rating">${avg}점</span></div>
             </div>
         `;
@@ -108,9 +88,7 @@ async function updateRealTimePrices() {
             if (liveData) coin.price = liveData.priceUsd;
         });
         if (!window.location.hash) renderCoins(mockCoins);
-    } catch (error) {
-        console.error("Price fetch failed:", error);
-    }
+    } catch (error) { console.error("Price fetch failed", error); }
 }
 
 function calculateAverageRating(symbol) {
@@ -126,13 +104,10 @@ function getMedal(avg) {
     return { label: "BRONZE", color: "#cd7f32", textColor: "#fff" };
 }
 
-const listView = document.getElementById('list-view');
-const detailView = document.getElementById('detail-view');
-const detailContent = document.getElementById('detail-content');
-const searchInput = document.getElementById('searchInput');
-
 function handleRoute() {
     const symbol = window.location.hash.substring(1);
+    const listView = document.getElementById('list-view');
+    const detailView = document.getElementById('detail-view');
     if (symbol) {
         const coin = mockCoins.find(c => c.symbol === symbol);
         if (coin) {
@@ -160,7 +135,8 @@ menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
 function renderDetail(coin) {
     const avg = calculateAverageRating(coin.symbol);
     const medal = getMedal(avg);
-    const priceDisplay = coin.price > 0 ? `$${parseFloat(coin.price).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}` : "Loading...";
+    const detailContent = document.getElementById('detail-content');
+    const priceDisplay = coin.price > 0 ? `$${parseFloat(coin.price).toLocaleString(undefined, {minimumFractionDigits: 2})}` : "Loading...";
 
     detailContent.innerHTML = `
         <div class="detail-header">
@@ -179,16 +155,13 @@ function renderDetail(coin) {
             <h3>프로젝트 소개</h3>
             <p>${coin.desc}</p>
         </div>
-        <div class="rating-section" id="ratingSection">
-            <!-- Protected Content -->
-        </div>
+        <div class="rating-section" id="ratingSection"></div>
         <div class="comments-section">
             <h3>커뮤니티 의견</h3>
             <ul id="commentList" class="comment-list"></ul>
         </div>
     `;
 
-    // Render protected rating section
     const ratingSection = document.getElementById('ratingSection');
     if (currentUser) {
         ratingSection.innerHTML = `
@@ -206,7 +179,7 @@ function renderDetail(coin) {
             <div class="login-prompt">
                 <h4>커뮤니티 평가에 참여하시겠습니까?</h4>
                 <p>댓글 작성과 평점 부여를 위해 로그인이 필요합니다.</p>
-                <button onclick="handleLogin()" class="auth-btn" style="margin: 1.5rem auto 0; background: var(--primary-color); color: white; padding: 0.8rem 2rem;">Google로 시작하기</button>
+                <button onclick="firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())" class="auth-btn" style="margin: 1.5rem auto 0; background: var(--primary-color); color: white; padding: 0.8rem 2rem;">LOGIN</button>
             </div>
         `;
     }
@@ -214,15 +187,8 @@ function renderDetail(coin) {
     new TradingView.widget({
         "autosize": true,
         "symbol": coin.symbol === "USDC" ? "COINBASE:USDCUSDT" : `BINANCE:${coin.symbol}USDT`,
-        "interval": "D",
-        "timezone": "Etc/UTC",
-        "theme": document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light',
-        "style": "1",
-        "locale": "ko",
-        "toolbar_bg": "#f1f3f6",
-        "enable_publishing": false,
-        "allow_symbol_change": true,
-        "container_id": "tradingview_widget"
+        "interval": "D", "timezone": "Etc/UTC", "theme": document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light',
+        "style": "1", "locale": "ko", "container_id": "tradingview_widget"
     });
 
     loadComments(coin.symbol);
@@ -235,20 +201,11 @@ function setupDetailLogic(symbol) {
     const btn = document.getElementById('submitComment');
 
     slider?.addEventListener('input', (e) => valDisplay.textContent = e.target.value);
-
     btn?.addEventListener('click', () => {
         const text = input.value.trim();
         if (!text) return alert('내용을 입력해주세요!');
         let comments = JSON.parse(localStorage.getItem(`comments_${symbol}`) || '[]');
-        comments.push({
-            id: Date.now(),
-            text,
-            rating: slider.value,
-            user: currentUser.displayName,
-            photo: currentUser.photoURL,
-            date: new Date().toISOString(),
-            up: 0, down: 0
-        });
+        comments.push({ id: Date.now(), text, rating: slider.value, user: currentUser.displayName, photo: currentUser.photoURL, date: new Date().toISOString(), up: 0, down: 0 });
         localStorage.setItem(`comments_${symbol}`, JSON.stringify(comments));
         input.value = '';
         renderDetail(mockCoins.find(c => c.symbol === symbol));
@@ -259,7 +216,6 @@ function loadComments(symbol) {
     const list = document.getElementById('commentList');
     let comments = JSON.parse(localStorage.getItem(`comments_${symbol}`) || '[]');
     comments.sort((a, b) => ((b.up || 0) - (b.down || 0)) - ((a.up || 0) - (a.down || 0)));
-
     list.innerHTML = comments.map((c, i) => `
         <li class="comment-item">
             ${i < 3 && (c.up || 0) > 0 ? `<span class="best-badge">BEST</span>` : ''}
@@ -303,14 +259,14 @@ function applyTheme(theme) {
 }
 
 document.getElementById('themeToggle').addEventListener('click', () => {
-    const newTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-    applyTheme(newTheme);
+    applyTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
 });
 
 applyTheme(localStorage.getItem('theme') || 'light');
 
 function renderCoins(coins) {
     const coinList = document.getElementById('coin-list');
+    if (!coinList) return;
     coinList.innerHTML = '';
     coins.forEach(coin => {
         const card = document.createElement('coin-card');
@@ -319,7 +275,7 @@ function renderCoins(coins) {
     });
 }
 
-searchInput.addEventListener('input', (e) => {
+document.getElementById('searchInput').addEventListener('input', (e) => {
     const term = e.target.value.toLowerCase();
     const filtered = mockCoins.filter(c => c.name.toLowerCase().includes(term) || c.symbol.toLowerCase().includes(term));
     renderCoins(filtered);
@@ -327,9 +283,5 @@ searchInput.addEventListener('input', (e) => {
 
 const script = document.createElement('script');
 script.src = "https://s3.tradingview.com/tv.js";
-script.onload = () => { 
-    handleRoute(); 
-    updateRealTimePrices();
-    setInterval(updateRealTimePrices, 10000);
-};
+script.onload = () => { handleRoute(); updateRealTimePrices(); setInterval(updateRealTimePrices, 10000); };
 document.head.appendChild(script);
