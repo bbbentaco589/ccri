@@ -1,23 +1,26 @@
 # CCRI (Coin Crypto Risk Index)
 
 ## Overview
-A professional crypto analysis community featuring real-time market data, medal-based ratings, and upvote-driven discussions.
+A secure, community-driven crypto analysis platform with Firebase Google Auth and precision charts.
 
 ## Project Outline
 
 ### Design and Style
-*   **Theme Toggle:** High-visibility toggle with color-coded SVG icons (Yellow Sun / Blue Moon) and refined typography.
-*   **Real-time UI:** Live price updates via CoinCap API.
-*   **Mobile First:** Responsive design with an improved hamburger menu.
+*   **Responsive Charts:** Fixed mobile empty spaces by using a flexible aspect-ratio container and TradingView's `autosize`.
+*   **Auth-Integrated UI:** Dynamic navigation bar that shows "Login" or "User Profile" based on auth state.
+*   **Theming:** High-visibility Light/Dark modes with refined toggle.
 
 ### Features
-*   **Medal System:** Gold (90+), Silver (70-89), Bronze (<70).
-*   **Popularity-sorted Comments:** Upvote system with "BEST" badges for top discussions.
-*   **Professional Charts:** 70vh high TradingView integration.
+*   **Google Auth:** Firebase Authentication integration for secure user login.
+*   **Protected Comments:** Comment section accessible only to authenticated users. Guest users see a login prompt.
+*   **Live Price Ticker:** 10-second interval updates via CoinCap API.
+*   **Medal System:** Dynamic ranking (Gold/Silver/Bronze) based on 100-pt community ratings.
 
 ## Current Plan
-1.  **Refine Theme Toggle (CSS/JS)**: 
-    *   Enhance SVG icons with specific colors.
-    *   Improve button background contrast and hover animations.
-    *   Ensure crisp font rendering for theme labels.
-2.  **Deployment**: Commit and push.
+1.  **Firebase Integration (HTML)**: Add Firebase SDK scripts.
+2.  **Auth Logic (JS)**: Implement Google Login/Logout and state monitoring.
+3.  **Chart Refinement (CSS/JS)**: 
+    *   Apply `autosize: true` to TradingView widget.
+    *   Use `vh` and `calc` for better mobile chart scaling.
+4.  **Protected UI**: Toggle comment form visibility based on login status.
+5.  **Deployment**: Commit and push to Git.

@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CCRI - Coin Crypto Risk Index</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
 </head>
 <body>
     <nav class="top-nav">
@@ -19,6 +22,10 @@
                     <span class="main-label">Mink NFT</span>
                     <span class="sub-label">MarketPlace ↗</span>
                 </a>
+                <div id="authContainer" class="auth-container">
+                    <!-- Login/Logout button will be injected here -->
+                    <button id="loginBtn" class="auth-btn">Google 로그인</button>
+                </div>
                 <button id="themeToggle" class="theme-toggle">
                     <span class="icon"></span>
                     <span class="text">다크 모드</span>
