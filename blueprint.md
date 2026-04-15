@@ -1,28 +1,28 @@
 # CCRI (Coin Crypto Risk Index)
 
 ## Overview
-A community-driven crypto analysis platform with real-time charts and precision rating systems.
+A professional crypto analysis community featuring real-time charts, medal-based ratings, and upvote-driven discussions.
 
 ## Project Outline
 
 ### Design and Style
-*   **Header:** Ultra-large 3D metallic CCRI title.
-*   **Search:** Enhanced search bar with a magnifying glass icon and increased vertical spacing.
-*   **Detail View:** Large-scale TradingView chart (1200px height) for maximum visibility.
-*   **Integrated Form:** Combined comment and 0.1-step precision rating system.
+*   **Theming:** Restored clean and elegant Light/Dark modes with refined typography.
+*   **Mobile First:** Responsive design optimized for devices like Galaxy S20, featuring a hamburger menu for top categories.
+*   **Layout Spacing:** Balanced spacing between header, search bar, and coin list.
+*   **Medal System:** 
+    *   Gold: 90-100
+    *   Silver: 70-89
+    *   Bronze: Below 70
 
 ### Features
-*   **Average Rating:** Real-time calculation of user ratings displayed in the detail header.
-*   **Precision Star System:** 10 stars that fill dynamically based on 0.1 increment ratings.
-*   **Data Persistence:** LocalStorage management for detailed user feedback and ratings.
+*   **100-Point Rating:** User ratings from 1 to 100 with dynamic medal display.
+*   **Votable Comments:** Upvote/Downvote system with sorting by popularity.
+*   **Best Comments:** Highlights top 3 most-upvoted comments.
+*   **SPA Routing:** Reliable hash-based navigation to detail pages.
 
 ## Current Plan
-1.  **UI Overhaul (HTML/CSS)**: 
-    *   Increase title size.
-    *   Add search icon and spacing.
-    *   Redesign detail page to match widths and show average ratings.
-2.  **Logic Update (JS)**:
-    *   Implement 0.1-step rating slider.
-    *   Calculate and display average ratings per coin.
-    *   Bind rating selection to comment submission.
-3.  **Deployment**: Commit and push to Git.
+1.  **Responsive Layout (HTML/CSS)**: Implement mobile menu and fix spacing.
+2.  **Theming & Fonts**: Restore aesthetic fonts and balanced colors.
+3.  **Rating & Medals (JS)**: Update to 100-point scale and add medal logic.
+4.  **Advanced Comments (JS)**: Implement voting, sorting, and "Best" badges.
+5.  **Deployment**: Push to Git.

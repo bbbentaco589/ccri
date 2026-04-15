@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,8 @@
 <body>
     <nav class="top-nav">
         <div class="nav-container">
-            <div class="nav-links">
+            <div class="nav-logo" id="homeLinkTop">CCRI</div>
+            <div class="nav-menu" id="navMenu">
                 <a href="https://linktr.ee/ccgguild" target="_blank" class="nav-item">
                     <span class="main-label">CCGG</span>
                     <span class="sub-label">Linktree ↗</span>
@@ -18,11 +19,12 @@
                     <span class="main-label">Mink NFT</span>
                     <span class="sub-label">MarketPlace ↗</span>
                 </a>
+                <button id="themeToggle" class="theme-toggle">
+                    <span class="icon"></span>
+                    <span class="text">다크 모드</span>
+                </button>
             </div>
-            <button id="themeToggle" class="theme-toggle">
-                <span class="icon"></span>
-                <span class="text">다크 모드</span>
-            </button>
+            <button class="menu-toggle" id="menuToggle">☰</button>
         </div>
     </nav>
 
@@ -34,9 +36,11 @@
     <main>
         <div id="list-view" class="view">
             <div class="container">
-                <div class="search-wrapper">
-                    <input type="text" id="searchInput" placeholder="Search for a coin...">
-                    <span class="search-icon">🔍</span>
+                <div class="search-section">
+                    <div class="search-wrapper">
+                        <input type="text" id="searchInput" placeholder="코인을 검색하세요...">
+                        <span class="search-icon">🔍</span>
+                    </div>
                 </div>
                 <div id="coin-list" class="coin-list">
                     <!-- Coin components will be inserted here -->
@@ -47,7 +51,7 @@
         <div id="detail-view" class="view hidden">
             <div class="container">
                 <button id="backButton" class="back-btn">
-                    <span class="arrow">←</span> 뒤로가기
+                    <span class="arrow">←</span> 리스트로 돌아가기
                 </button>
                 <div id="detail-content">
                     <!-- Detail content will be inserted here -->
