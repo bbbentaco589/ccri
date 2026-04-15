@@ -91,22 +91,15 @@ header { background: var(--primary-gradient); color: white; text-align: center; 
     filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); letter-spacing: -2px;
 }
 
-/* Search Section - Fixed Mobile Alignment */
-.search-section { 
-    padding: 4rem 0 2rem 0; /* Vertical padding only */
-    width: 100%;
-}
-.search-wrapper { 
-    position: relative; 
-    max-width: 800px; /* Slightly wider */
-    margin: 0 auto; 
-}
+/* Search Section */
+.search-section { padding: 4rem 0 2rem 0; width: 100%; }
+.search-wrapper { position: relative; max-width: 800px; margin: 0 auto; }
 #searchInput {
     width: 100%; padding: 1.2rem 3.5rem 1.2rem 1.8rem;
     border: none; border-radius: 50px; background: var(--input-bg);
     color: var(--text-color); font-size: 1.1rem; box-shadow: 0 8px 24px var(--shadow-color);
     transition: transform 0.3s, box-shadow 0.3s;
-    box-sizing: border-box; /* Crucial for padding */
+    box-sizing: border-box;
 }
 #searchInput:focus { outline: none; transform: translateY(-2px); box-shadow: 0 12px 32px var(--shadow-color); }
 .search-icon { position: absolute; right: 25px; top: 50%; transform: translateY(-50%); font-size: 1.3rem; opacity: 0.5; }
@@ -133,10 +126,19 @@ coin-card:hover { transform: translateY(-8px); }
     margin: 2rem 0; display: flex; align-items: center; gap: 10px;
 }
 
+/* Optimized Chart Container */
 .chart-container {
-    height: 70vh; min-height: 600px;
-    background: #131722; border-radius: 24px; overflow: hidden;
-    margin-bottom: 3rem; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    width: 100%;
+    height: 800px; /* PC Fixed Height */
+    background: #131722;
+    border-radius: 24px;
+    overflow: hidden;
+    margin-bottom: 3rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+.chart-container iframe {
+    width: 100% !important;
+    height: 100% !important;
 }
 
 .detail-header { display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; margin-bottom: 3rem; }
@@ -191,9 +193,10 @@ coin-card:hover { transform: translateY(-8px); }
     .nav-menu.active { right: 0; }
     .detail-header { justify-content: center; text-align: center; }
     .main-title { font-size: 4rem; }
-    .chart-container { height: 50vh; min-height: 400px; }
     
-    /* Mobile Search Bar Fixed Alignment */
+    /* Mobile Chart Height */
+    .chart-container { height: 500px; min-height: 500px; }
+    
     .search-section { padding: 3rem 0 1.5rem 0; }
     .search-wrapper { max-width: 100%; }
 }
