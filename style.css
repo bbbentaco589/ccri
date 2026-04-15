@@ -2,10 +2,12 @@
     --primary-color: #7b2cbf;
     --nav-bg: linear-gradient(180deg, #3c096c 0%, #240046 100%);
     --primary-gradient: linear-gradient(135deg, #9d4edd 0%, #7b2cbf 50%, #5a189a 100%);
-    --metallic-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.3), inset 0 -2px 5px rgba(0, 0, 0, 0.3), 0 10px 20px rgba(0, 0, 0, 0.2);
-    --btn-metallic: linear-gradient(135deg, #240046 0%, #3c096c 50%, #10002b 100%);
     
-    /* Medal Colors */
+    /* Unified Purple Metallic Style */
+    --metallic-bg: linear-gradient(135deg, #9d4edd 0%, #7b2cbf 50%, #5a189a 100%);
+    --metallic-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3), inset 0 -2px 4px rgba(0, 0, 0, 0.3), 0 4px 10px rgba(0, 0, 0, 0.3);
+    --metallic-glow: 0 0 15px rgba(157, 78, 221, 0.5);
+
     --medal-gold: #ffd700;
     --medal-silver: #c0c0c0;
     --medal-bronze: #cd7f32;
@@ -36,7 +38,33 @@ body {
     overflow-x: hidden;
 }
 
-/* Navigation & Auth (Restore Format) */
+/* Base Metallic Button Class */
+.btn-metallic {
+    background: var(--metallic-bg);
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 0.6rem 1.5rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--metallic-shadow);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+.btn-metallic:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--metallic-shadow), var(--metallic-glow);
+    filter: brightness(1.1);
+}
+.btn-metallic:active { transform: translateY(0); }
+
+/* Navigation */
 .top-nav {
     background: var(--nav-bg); color: white; padding: 0.8rem 0;
     position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -46,7 +74,7 @@ body {
     justify-content: space-between; align-items: center; padding: 0 1.5rem;
 }
 .nav-logo { font-size: 1.5rem; font-weight: 900; cursor: pointer; letter-spacing: -1px; }
-.nav-menu { display: flex; gap: 2rem; align-items: center; }
+.nav-menu { display: flex; gap: 1.5rem; align-items: center; }
 .nav-links { display: flex; gap: 2.5rem; }
 
 .nav-item { color: white; text-decoration: none; text-align: center; transition: opacity 0.2s; }
@@ -54,34 +82,30 @@ body {
 .main-label { font-weight: 700; font-size: 1rem; display: block; }
 .sub-label { font-size: 0.65rem; color: #ffcc00; display: block; }
 
-/* LOGIN Button Style */
-.auth-btn {
-    background: var(--primary-color);
+/* Overriding specific buttons with Metallic Style */
+.auth-btn, .theme-toggle, .back-btn, #submitComment, .vote-btn {
+    extend: .btn-metallic; /* Note: CSS doesn't support extend directly, applying properties below */
+    background: var(--metallic-bg);
     color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 0.5rem 1.2rem;
-    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 0.6rem 1.5rem;
     font-weight: 800;
-    font-size: 0.8rem;
     cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 1px;
-}
-.auth-btn:hover {
-    background: #9d4edd;
-    box-shadow: 0 0 10px var(--primary-color);
+    box-shadow: var(--metallic-shadow);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    font-size: 0.85rem;
 }
 
-.user-profile { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; font-weight: 600; }
-.user-profile img { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--medal-gold); }
-
-/* Theme Toggle Button Refined */
-.theme-toggle {
-    background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15); color: white;
-    padding: 0.5rem 1rem; border-radius: 50px; cursor: pointer;
-    font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; gap: 8px;
+.auth-btn:hover, .theme-toggle:hover, .back-btn:hover, #submitComment:hover, .vote-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--metallic-shadow), var(--metallic-glow);
+    filter: brightness(1.1);
 }
+
+.vote-btn { padding: 0.4rem 1rem; font-size: 0.75rem; border-radius: 8px; }
+.theme-toggle { background: rgba(0, 0, 0, 0.4); padding: 0.5rem 1.2rem; } /* Slightly darker for nav contrast */
 .theme-toggle svg { width: 16px; height: 16px; }
 .theme-toggle .icon-sun { color: #ffcc00; }
 .theme-toggle .icon-moon { color: #82ccdd; }
@@ -131,6 +155,7 @@ coin-card:hover { transform: translateY(-8px); }
     }
     .nav-menu.active { right: 0; }
     .nav-links { flex-direction: column; gap: 1.5rem; }
+    .auth-btn, .theme-toggle { width: 100%; }
 }
 
 footer { text-align: center; padding: 4rem; background: var(--footer-bg); margin-top: 6rem; }

@@ -29,7 +29,6 @@ const mockCoins = [
 
 let currentUser = null;
 
-// --- Auth Monitoring ---
 auth.onAuthStateChanged((user) => {
     currentUser = user;
     const authContainer = document.getElementById('authContainer');
@@ -37,7 +36,7 @@ auth.onAuthStateChanged((user) => {
         authContainer.innerHTML = `
             <div class="user-profile">
                 <img src="${user.photoURL}" alt="profile">
-                <button id="logoutBtn" class="auth-btn" style="background:rgba(255,255,255,0.1)">LOGOUT</button>
+                <button id="logoutBtn" class="auth-btn">LOGOUT</button>
             </div>
         `;
         document.getElementById('logoutBtn').addEventListener('click', () => auth.signOut());
@@ -171,7 +170,7 @@ function renderDetail(coin) {
                 <input type="range" id="ratingSlider" class="rating-slider" min="1" max="100" value="50">
             </div>
             <textarea id="commentInput" class="comment-textarea" placeholder="이 코인에 대한 한줄평을 남겨주세요..."></textarea>
-            <button id="submitComment" class="back-btn" style="margin:0; width:100%; justify-content:center;">게시하기</button>
+            <button id="submitComment" class="btn-metallic" style="width:100%; height: 50px;">게시하기</button>
         `;
         setupDetailLogic(coin.symbol);
     } else {
@@ -179,7 +178,7 @@ function renderDetail(coin) {
             <div class="login-prompt">
                 <h4>커뮤니티 평가에 참여하시겠습니까?</h4>
                 <p>댓글 작성과 평점 부여를 위해 로그인이 필요합니다.</p>
-                <button onclick="firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())" class="auth-btn" style="margin: 1.5rem auto 0; background: var(--primary-color); color: white; padding: 0.8rem 2rem;">LOGIN</button>
+                <button onclick="auth.signInWithPopup(provider)" class="auth-btn" style="margin: 1.5rem auto 0; padding: 0.8rem 2rem;">LOGIN</button>
             </div>
         `;
     }
