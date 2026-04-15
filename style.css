@@ -1,4 +1,3 @@
-
 :root {
     --primary-color: #007bff;
     --secondary-color: #6c757d;
@@ -7,6 +6,20 @@
     --card-background: #fff;
     --shadow-color: rgba(0, 0, 0, 0.1);
     --glow-color: rgba(0, 123, 255, 0.5);
+    --input-bg: #fff;
+    --input-border: #ccc;
+    --footer-bg: #e9ecef;
+}
+
+[data-theme='dark'] {
+    --background-color: #121212;
+    --text-color: #e0e0e0;
+    --card-background: #1e1e1e;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --glow-color: rgba(0, 123, 255, 0.3);
+    --input-bg: #2d2d2d;
+    --input-border: #444;
+    --footer-bg: #1a1a1a;
 }
 
 body {
@@ -14,6 +27,7 @@ body {
     margin: 0;
     background-color: var(--background-color);
     color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 header {
@@ -22,13 +36,32 @@ header {
     text-align: center;
     padding: 2rem 0;
     background: linear-gradient(135deg, #007bff, #0056b3);
+    position: relative;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
 header h1 {
     margin: 0;
     font-size: 3rem;
     font-weight: bold;
-    text-shadow: 0 2px 4px var(--shadow-color);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 main {
@@ -47,11 +80,13 @@ main {
 #searchInput {
     width: 100%;
     padding: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid var(--input-border);
     border-radius: 8px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
     font-size: 1rem;
     box-shadow: 0 2px 4px var(--shadow-color);
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 #searchInput:focus {
@@ -69,7 +104,7 @@ coin-card {
     background-color: var(--card-background);
     border-radius: 12px;
     box-shadow: 0 4px 12px var(--shadow-color);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
     overflow: hidden;
     display: block;
 }
@@ -83,5 +118,6 @@ footer {
     text-align: center;
     padding: 1rem;
     margin-top: 2rem;
-    background-color: #e9ecef;
+    background-color: var(--footer-bg);
+    transition: background-color 0.3s ease;
 }

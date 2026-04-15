@@ -1,4 +1,3 @@
-
 class CoinCard extends HTMLElement {
     constructor() {
         super();
@@ -10,11 +9,16 @@ class CoinCard extends HTMLElement {
 
         this.shadowRoot.innerHTML = `
             <style>
+                :host {
+                    display: block;
+                    height: 100%;
+                }
                 .card {
                     padding: 1.5rem;
                     display: flex;
                     flex-direction: column;
                     height: 100%;
+                    color: var(--text-color);
                 }
                 .card-header {
                     display: flex;
@@ -25,10 +29,11 @@ class CoinCard extends HTMLElement {
                     width: 40px;
                     height: 40px;
                     margin-right: 1rem;
+                    border-radius: 50%;
                 }
                 .card-header h3 {
                     margin: 0;
-                    font-size: 1.5rem;
+                    font-size: 1.2rem;
                     font-weight: bold;
                 }
                 .card-body p {
@@ -36,7 +41,7 @@ class CoinCard extends HTMLElement {
                 }
                 .risk-index {
                     width: 100%;
-                    background-color: #e9ecef;
+                    background-color: var(--footer-bg);
                     border-radius: 8px;
                     overflow: hidden;
                     margin-top: 1rem;
@@ -48,19 +53,21 @@ class CoinCard extends HTMLElement {
                     text-align: center;
                     line-height: 20px;
                     color: white;
+                    font-size: 0.8rem;
                     font-weight: bold;
                     background-image: linear-gradient(45deg, rgba(255,255,255,.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.15) 75%, transparent 75%, transparent);
+                    transition: width 0.5s ease;
                 }
             </style>
             <div class="card">
                 <div class="card-header">
-                    <img src="https://via.placeholder.com/40" alt="${coin.name} logo">
+                    <img src="https://api.dicebear.com/7.x/identicon/svg?seed=${coin.symbol}" alt="${coin.name} logo">
                     <h3>${coin.name} (${coin.symbol})</h3>
                 </div>
                 <div class="card-body">
                     <p><strong>Price:</strong> $${coin.price.toLocaleString()}</p>
                     <div class="risk-index">
-                        <div class="risk-index-fill" style="width: ${coin.riskIndex}%;">${coin.riskIndex}%</div>
+                        <div class="risk-index-fill">${coin.riskIndex}%</div>
                     </div>
                 </div>
             </div>
@@ -81,6 +88,25 @@ const mockCoins = [
 
 const coinList = document.getElementById('coin-list');
 const searchInput = document.getElementById('searchInput');
+const themeToggle = document.getElementById('themeToggle');
+
+// Theme Logic
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
+updateToggleText(savedTheme);
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateToggleText(newTheme);
+});
+
+function updateToggleText(theme) {
+    themeToggle.textContent = theme === 'light' ? 'Dark Mode' : 'Light Mode';
+}
 
 function renderCoins(coins) {
     coinList.innerHTML = '';
